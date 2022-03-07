@@ -30,27 +30,33 @@ for show in all_data:
     latitude = show['latitude']
     longitude = show['longitude']
     category = show['CAT2']
+    images = show['file']
     sql = " insert into level2 (id ,name ,description ,address ,transport ,mrt ,latitude ,longitude ,category) values ('{}','{}','{}','{}','{}','{}','{}','{}','{}');".format(id,name,description,address,transport,mrt,latitude,longitude,category)
     cursor.execute(sql)
     connection.commit()  
-
-    all_img = []
+    
+ 
     for j in range(len(all_data)):
-        all_http = re.finditer(r'http',all_data[j]['file'],flags = re.M)
-        all_jpg = re.finditer(r'(?i)jpg',all_data[j]['file'], flags = re.M)
+        all_http = re.finditer(r'http',images,flags = re.M)
+        all_jpg = re.finditer(r'(?i)jpg',images, flags = re.M)
         index_http = []
         index_jpg = []
-
+        
     for matchhttp in all_http:
         index_http.append(matchhttp.span()[0])
     for matchjpg in all_jpg:
         index_jpg.append(matchjpg.span()[1])
-
+       
     for i in range(len(index_http)):
-        images = all_data[j]['file'][index_http[i]:index_jpg[i]]
-        sql = " insert into level2_images (id_images ,images) values ('{}','{}');".format(id,images)
-        cursor.execute(sql)
-        connection.commit()  
+        try:
+            all_images = images[index_http[i]:index_jpg[i]]
+            print(id,all_images)
+            sql = " insert into level2_images (id_images ,images) values ('{}','{}');".format(id,all_images)
+            cursor.execute(sql)
+            connection.commit()  
+          
+        except:
+            break
 
    
     # data={
