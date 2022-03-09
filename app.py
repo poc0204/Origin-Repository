@@ -201,4 +201,7 @@ def link_mysql():
        return False
    
     return connection  
+
+
+
 app.run(host='0.0.0.0',port=3000)
