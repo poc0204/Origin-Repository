@@ -193,8 +193,8 @@ def link_mysql():
         connection = mysql.connector.connect(
             host = 'localhost',
             database = 'website',
-            user = 'root',
-            password = 'mysql'
+            user = 'newuser',
+            password = 'newpassword'
         )
     	
     except:
