@@ -11,13 +11,7 @@ from matplotlib.font_manager import json_dump
 import mysql.connector
 from mysql.connector import Error
 from numpy import False_
-connection = mysql.connector.connect(
-		host = 'localhost',
-		database = 'website',
-		user = 'root',
-		password = 'mysql'
 
-	)
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
@@ -36,7 +30,7 @@ def attraction(id):
 def api_attractions():
 	page = request.args.get('page')
 	keyword = request.args.get('keyword')
-
+	connection = link_mysql() 
 	cursor = connection.cursor()
 
 	sql = "select  COUNT(id) from level2; "
@@ -116,7 +110,7 @@ def api_attractions():
 	else:
 		msg = "伺服器內部錯誤"
 		data = {
-		"error":False == False,
+		"error":link_mysql()  == False,
 		"message":msg
 		}
 		data = json.dumps(data,ensure_ascii=False).encode('utf8')
@@ -127,7 +121,7 @@ def api_attractions():
 @app.route("/api/attractions/<id>",methods=['GET'])
 def api_attraction(id):
 	try:
-
+		connection = link_mysql() 
 		cursor = connection.cursor()
 		sql = "select * from level2 where id = '{}'".format(id)
 		cursor.execute(sql)
@@ -171,7 +165,7 @@ def api_attraction(id):
 	except:
 		msg = "伺服器內部錯誤"
 		data = {
-		"error":False  == False,
+		"error":link_mysql()  == False,
 		"message":msg
 		}
 		data = json.dumps(data,ensure_ascii=False).encode('utf8')
@@ -186,19 +180,19 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
-# def link_mysql():
-#     try:
-#         connection = mysql.connector.connect(
-#             host = 'localhost',
-#             database = 'website',
-#             user = 'root',
-#             password = 'mysql'
-#         )
+def link_mysql():
+    try:
+        connection = mysql.connector.connect(
+            host = 'localhost',
+            database = 'website',
+            user = 'root',
+            password = 'mysql'
+        )
     	
-#     except:
-#        return False
+    except:
+       return False
    
-#    return connection  
+    return connection  
 
 
 
