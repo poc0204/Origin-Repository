@@ -38,7 +38,7 @@ def api_attractions():
 		id_count = cursor.fetchall()
 		page_start = int(page)
 		page_max = id_count[0][0]/12
-		data = []
+		
 		for_id = []
 		for_name = []
 		for_category = []
@@ -87,8 +87,7 @@ def api_attractions():
 				cursor.execute(sql)
 				id_images = cursor.fetchall()
 				for_images.append(id_images)
-			data.append(
-					[{
+			data = {
 					"nextPage": page_start+1,
 					"data": [{
 						"id":for_id,
@@ -103,7 +102,7 @@ def api_attractions():
 						"images":for_images
 					}]
 
-						}])
+						}
 			data = json.dumps(data,ensure_ascii=False).encode('utf8')
 			return data
 		else:
@@ -193,8 +192,8 @@ def link_mysql():
         connection = mysql.connector.connect(
             host = 'localhost',
             database = 'website',
-            user = 'root',
-            password = 'mysql'
+            user = 'newuser',
+            password = 'newpassword'
         )
     	
     except:
