@@ -1,4 +1,3 @@
-from datetime import date
 import mysql.connector
 import json
 import re
@@ -16,19 +15,26 @@ page_start = int(input())
 page_max = id_count[0][0]/12
 json_data = []
 
+data_images =[]
 if page_start <= page_max:
     page_start_time = page_start*12
     sql = "select * from level2 LIMIT {}, 12; ".format(page_start_time)
     cursor.execute(sql)
     id_data = cursor.fetchall()
     for i in range(len(id_data)):
-
+        data_images =[]
         sql = "select images from level2_images where id_images = '{}'".format(id_data[i][0])
         cursor.execute(sql)
-        id_images = str(cursor.fetchall())
-        id_images = re.sub(r'[(,)]','',id_images)
-        id_images = re.sub(r' ',',',id_images)
-        #print(id_images)
+        #id_images = cursor.fetchall()
+
+        id_images = cursor.fetchall()
+        for j in range(len(id_images)):
+            images = str(id_images[j])
+            images = re.sub(r'[(,)]','',images)
+            images = re.sub(r' ',',',images)
+            images = re.sub(r'\'','',images)
+            data_images.append(images)
+        #print(data_images)        
         data={
                 "nextPage": page_start+1,
                 "data": {
@@ -41,12 +47,13 @@ if page_start <= page_max:
                     "mrt":id_data[i][5],
                     "latitude":id_data[i][7],
                     "longitude":id_data[i][8],
-                    "images":id_images
+                    "images":data_images
                 }
 
             }
+        
         json_data.append(data)
-    print(json_data)
+    print(json_data[0])
 
 
 else:

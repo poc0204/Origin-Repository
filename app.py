@@ -1,17 +1,6 @@
-from email import header
-from encodings.utf_8_sig import encode
-from this import d
-from urllib import response
 from flask import Flask ,redirect,url_for ,render_template , request , session  , make_response,jsonify
-import math
 import json , re
-from operator import le
-from telnetlib import PRAGMA_HEARTBEAT
-from matplotlib.font_manager import json_dump
 import mysql.connector
-from mysql.connector import Error
-from numpy import False_
-import MySQLdb
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
@@ -63,34 +52,48 @@ def api_attractions():
 						return data
 			cursor.execute(sql)
 			id_data = cursor.fetchall()
-	
-			for i in range(len(id_data)):
-				sql = "select images from level2_images where id_images = '{}'".format(id_data[i][0])
-				cursor.execute(sql)
-				id_images = str(cursor.fetchall())
-				id_images = re.sub(r'[(,)]','',id_images)
-				id_images = re.sub(r' ',',',id_images)
-				data={
-							"id":id_data[i][0],
-							"name":id_data[i][1],
-							"category":id_data[i][6],
-							"description":id_data[i][2],
-							"address":id_data[i][3],
-							"transport":id_data[i][4],
-							"mrt":id_data[i][5],
-							"latitude":id_data[i][7],
-							"longitude":id_data[i][8],
-							"images":id_images
-						}
+			if id_data != []:
+				for i in range(len(id_data)):
+					data_images =[]
+					sql = "select images from level2_images where id_images = '{}'".format(id_data[i][0])
+					cursor.execute(sql)
+					id_images = cursor.fetchall()
+					for j in range(len(id_images)):
+						images = str(id_images[j])
+						images = re.sub(r'[(,)]','',images)
+						images = re.sub(r' ',',',images)
+						images = re.sub(r'\'','',images)
+						data_images.append(images)
+					data={
+								"id":id_data[i][0],
+								"name":id_data[i][1],
+								"category":id_data[i][6],
+								"description":id_data[i][2],
+								"address":id_data[i][3],
+								"transport":id_data[i][4],
+								"mrt":id_data[i][5],
+								"latitude":id_data[i][7],
+								"longitude":id_data[i][8],
+								"images":data_images
+							}
 
-					
-				json_data.append(data)
-			#json_data = json.dumps(json_data,ensure_ascii=False).encode('utf8')
-			return {"nexypage":page_start+1,"data":json_data}
+						
+					json_data.append(data)
+				
+				return {"nexypage":page_start+1,"data":json_data}
+			else:
+				msg = "請重新輸入"
+				data = {
+				"error":True,
+				"message":msg
+				}
+				data = json.dumps(data,ensure_ascii=False).encode('utf8')
+				res = make_response(data)
+				return res 
 		else:
 				msg = "伺服器內部錯誤"
 				data = {
-				"error":link_mysql()  == False,
+				"error":True,
 				"message":msg
 				}
 				data = json.dumps(data,ensure_ascii=False).encode('utf8')
@@ -100,7 +103,7 @@ def api_attractions():
 	except:
 		msg = "伺服器內部錯誤"
 		data = {
-		"error":link_mysql()  == False,
+		"error":True,
 		"message":msg
 		}
 		data = json.dumps(data,ensure_ascii=False).encode('utf8')
@@ -155,7 +158,7 @@ def api_attraction(id):
 	except:
 		msg = "伺服器內部錯誤"
 		data = {
-		"error":link_mysql()  == False,
+		"error":True,
 		"message":msg
 		}
 		data = json.dumps(data,ensure_ascii=False).encode('utf8')
