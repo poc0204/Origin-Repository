@@ -1,0 +1,168 @@
+* reset */
+body, h1, ul { margin: 0px; }
+
+* { box-sizing: border-box; }
+body{
+  margin: 0px;
+}
+header{
+    display:flex;
+    width: 100%;
+    justify-content: center;
+}
+/* NavBar */
+nav {
+    
+    background:white;
+    width: 1200px;  
+}
+nav > h1{
+    float: left;
+    margin: 10px 0px 10px;
+    color: #448899;
+    padding: 0px;
+
+}
+
+nav > button{
+    float: right;
+    padding: 0px;
+    background-color: white;
+    border:0px;
+    margin: 20px 10px 20px;
+   
+}
+.second{
+  background-color:powderblue;
+  height:320px;
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.second_width{
+  width: 1200px;
+  height: 320px;
+
+}
+.second_image{
+  width: 650px;
+  height: 320px;
+  float:right;
+}
+.second_image > img {
+  width: 100%;
+}
+
+.second_content{
+ 
+  text-align: center;
+  float: left;
+  justify-content: center;
+  align-items: center;
+}
+  .thirdout{
+    margin-top: 20px;
+    display: flex;
+    width: auto;
+    
+    justify-content: center;
+  }
+  .third{
+      width: 1200px;
+      display: flex;
+      text-align: center;
+      flex-wrap:wrap;
+     
+  }
+  .third > div {
+    flex: none;
+    background-color: powderblue;
+    margin: 21px;
+    width:255px;
+}
+
+  
+  .third >  div > p > img {
+      width: 255px;
+      height: 180px;
+      
+  }
+
+  .third >  div >  p  {
+    margin: 0px;
+    
+}
+.third >  div >  span > p  {
+  margin: 0px;
+  
+
+}
+.third >  div > span{
+  font-size: 15px;
+}
+.btn{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+}
+  @media only screen and (max-width:1213px){
+    .third{
+        width: 90%;
+       
+    }
+    .allimg{
+    
+     width: 40%;
+    }
+    .allimg > p >  img{
+        width: 100%;
+      
+    }
+}
+ 
+  @media only screen and (max-width:601px){
+    .third{
+        width: 90%;
+       
+    }
+    .allimg{
+    
+     width: 90%;
+    }
+    .allimg > p > img{
+        width: 100%;
+        height: 100%;
+    }
+    h1{
+      margin-bottom: 0px;
+    }
+    input:checked ~ .menu {
+      max-height: 300px;
+    
+     
+    }
+    label {
+      float: right;
+      margin-top: 0px;
+      display: flex;
+    }
+   img{
+    width: 30px;
+    vertical-align: middle;
+    }
+   .menu {
+    clear: both;  
+    position:absolute;
+    clear: both;
+    width: 100px;
+    top:50px;
+    right: 0px;
+    max-height: 0;
+    overflow: hidden;
+    position:absolute;
+    
+  }
+}
