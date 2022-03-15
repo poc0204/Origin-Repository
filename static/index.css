@@ -1,7 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
 * reset */
 body, h1, ul { margin: 0px; }
 
-* { box-sizing: border-box; }
+*{box-sizing: border-box;}
 body{
   margin: 0px;
 }
@@ -9,19 +10,25 @@ header{
     display:flex;
     width: 100%;
     justify-content: center;
+    height: 62px;
+ 
 }
 /* NavBar */
 nav {
-    
+  
     background:white;
     width: 1200px;  
 }
-nav > h1{
+nav > a > h1{
     float: left;
     margin: 10px 0px 10px;
     color: #448899;
     padding: 0px;
-
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 34px;
 }
 
 nav > button{
@@ -33,136 +40,259 @@ nav > button{
    
 }
 .second{
-  background-color:powderblue;
+  background:linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
   height:320px;
   width:100%;
   display: flex;
   justify-content: center;
+     
+}
+.second_size{
+  width: 1200px;
+  height: 320px;
+  display: flex;
   align-items: center;
   
 }
-.second_width{
-  width: 1200px;
-  height: 320px;
+.second_content > h1{
+  font-size: 28px;
+  color: #F8F8F8;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
 
+  font-size: 28px;
+
+  margin: 0px;
+  margin-bottom: 15px;
+}
+.second_content > h3{
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+
+  font-size: 16px;
+
+  color: #F8F8F8;
+  margin: 0px;
+  margin-bottom: 25px;
+
+}
+.second_search > input{
+  width: 400px;
+  height: 46px;
+  background: #FFFFFF;
+  border-width: 0px;
+  border-radius:10px;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 13px;
+  color: #757575;
+}
+.second_search > button{
+  padding: 0px;
+  background: rgba(68, 136, 153, 1);
+  width: 60px;
+  height: 46px;
+  border-width: 0px;
+  border-radius:10px;
+}
+.second_search > button > img{
+  width: 30px;
+  height: 30px;
+}
+.second_search{
+display: flex;
+justify-content: center;
 }
 .second_image{
   width: 650px;
   height: 320px;
-  float:right;
+ margin-left: auto;
+
 }
 .second_image > img {
   width: 100%;
-}
 
-.second_content{
- 
-  text-align: center;
-  float: left;
-  justify-content: center;
-  align-items: center;
 }
-  .thirdout{
-    margin-top: 20px;
+.third_out{
     display: flex;
     width: auto;
-    
     justify-content: center;
+    margin-top: 40px;
   }
-  .third{
+.third{
       width: 1200px;
       display: flex;
       text-align: center;
       flex-wrap:wrap;
-     
+      margin: 15px;
+      justify-content: center;
   }
-  .third > div {
+.third > div {
     flex: none;
-    background-color: powderblue;
-    margin: 21px;
-    width:255px;
-}
-
-  
-  .third >  div > p > img {
-      width: 255px;
-      height: 180px;
-      
+    width: 270px;
+    height: 242px;
+    background: #FFFFFF;
+    border-style:  solid;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    border-width:0.5px;
+    border-color:rgba(232, 232, 232, 1);
+    margin: 15px;
   }
-
-  .third >  div >  p  {
-    margin: 0px;
-    
-}
-.third >  div >  span > p  {
+.third >  div > img {
+      width: 269px;
+      height: 160px;
+      border-top-left-radius:5px;
+      border-top-right-radius:5px;
+  }
+.third_p {
+  text-align: left;
+  width: 100%;
   margin: 0px;
-  
+  font-size: 16px;
+  color: #757575;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  padding: 10px;
+   }
 
+
+.third_a_right{
+  float: right;
+  margin: 0px;
+  font-size: 16px;
+  color: #757575;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 400;
+  padding: 0px 10px 10px;
 }
-.third >  div > span{
-  font-size: 15px;
+.third_a_left{
+  float:left;
+  margin: 0px;
+  font-size: 16px;
+  color: #757575;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 400;
+  padding: 0px 10px 10px 10px;
 }
-.btn{
+footer{
+  width: 100%;
+  background-color: #757575;
+  height: 104px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  text-align: center;
-
 }
-  @media only screen and (max-width:1213px){
+footer > h3 {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+  @media only screen and (max-width:1250px){
+    nav {
+      width: 1000px; 
+    }
+    .second_size{
+      width: 1000px; 
+    }
+
+    .second_image{
+      height: 320px;
+    }
+    .second_image > img {
+      height: 100%;
+    }
     .third{
-        width: 90%;
+      width: 1000px;
        
-    }
-    .allimg{
-    
-     width: 40%;
-    }
-    .allimg > p >  img{
-        width: 100%;
-      
     }
 }
  
-  @media only screen and (max-width:601px){
+  @media only screen and (max-width:1000px){
+    nav {
+      width: 900px; 
+    }
+    .second{
+      height: 280px;
+    }
+    .second_size{
+      width: 900px; 
+      height: 280px;
+    }
+
+    .second_image{
+      height: 280px;
+      
+    }
+    .second_image > img {
+      height: 100%;
+    }
     .third{
-        width: 90%;
+      width: 900px;
        
     }
-    .allimg{
+}
+@media only screen and (max-width:360px){
+
+  nav {
+    width: 340px; 
+  }
+  nav > button{
+    float: right;
+    padding: 0px;
+    background-color: white;
+    border:0px;
+    margin: 20px 5px 20px;
+    font-size: 16px;
+   
+}
+  .second{
+    height: 280px;
+  }
+  .second_size{
+    width: 340px; 
+    height: 280px;
+   
+
+  }
+  .second_content{
     
-     width: 90%;
-    }
-    .allimg > p > img{
-        width: 100%;
-        height: 100%;
-    }
-    h1{
-      margin-bottom: 0px;
-    }
-    input:checked ~ .menu {
-      max-height: 300px;
-    
-     
-    }
-    label {
-      float: right;
-      margin-top: 0px;
-      display: flex;
-    }
-   img{
-    width: 30px;
-    vertical-align: middle;
-    }
-   .menu {
-    clear: both;  
+    width: 360px;
+    z-index:2 ;
+  }
+
+  .second_content > h3{
+    font-size: 16px;
+  }
+  .second_search{
+    float: left;
+  }
+  .second_search > input{
+    width: 230px;
+    height: 46px;
+  
+  }
+  .second_image{
     position:absolute;
-    clear: both;
-    width: 100px;
-    top:50px;
-    right: 0px;
-    max-height: 0;
+    z-index:1 ;
+    right: -68px;
+    bottom:58.0%;
+
+    
+  }
+  .second_image{
+    width: 276px;
+    height: 148px;
     overflow: hidden;
-    position:absolute;
-    
+  }
+  .third{
+    width: 340px;
+     
   }
 }
