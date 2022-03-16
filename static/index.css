@@ -5,6 +5,7 @@ body, h1, ul { margin: 0px; }
 *{box-sizing: border-box;}
 body{
   margin: 0px;
+  
 }
 header{
     display:flex;
@@ -59,18 +60,14 @@ nav > button{
   color: #F8F8F8;
   font-family: 'Noto Sans TC';
   font-style: normal;
-
   font-size: 28px;
-
   margin: 0px;
   margin-bottom: 15px;
 }
 .second_content > h3{
   font-family: 'Noto Sans TC';
   font-style: normal;
-
   font-size: 16px;
-
   color: #F8F8F8;
   margin: 0px;
   margin-bottom: 25px;
@@ -216,32 +213,130 @@ footer > h3 {
  
   @media only screen and (max-width:1000px){
     nav {
-      width: 900px; 
+      width: 800px; 
     }
     .second{
       height: 280px;
     }
     .second_size{
-      width: 900px; 
+      width: 800px; 
       height: 280px;
     }
-
+    .second_search > input{
+      width: 250px;
+    }
     .second_image{
       height: 280px;
       
     }
     .second_image > img {
       height: 100%;
+      
     }
     .third{
-      width: 900px;
+      width: 800px;
        
     }
 }
-@media only screen and (max-width:360px){
+
+@media only screen and (max-width:800px){
+  nav {
+    width: 600px; 
+  }
+  .second{
+    height: 220px;
+  }
+  .second_size{
+    width: 600px; 
+    height: 220px;
+  }
+  .second_content > h1{
+    font-size: 20px;
+  }
+  .second_content > h3{
+    font-size: 15px;
+  }
+  .second_search > input{
+    width: 200px;
+    height: 30px;
+  }
+  .second_search > button{
+    width: 40px;
+    height: 30px;
+  }
+  .second_search > button > img{
+    width: 30px;
+    height:20px;
+  }
+  .second_image{
+    height: 220px;
+
+    
+  }
+  .second_image > img {
+    height: 100%;
+    
+  }
+  .third{
+    width: 600px;
+     
+  }
+}
+@media only screen and (max-width:630px){
 
   nav {
-    width: 340px; 
+    width: 500px; 
+  }
+  .second{
+    height: 220px;
+  }
+  .second_size{
+    width: 500px; 
+    height: 220px;
+  }
+  .second_content > h1{
+    font-size: 20px;
+  }
+  .second_content > h3{
+    font-size: 15px;
+  }
+
+  .second_search > input{
+    width: 180px;
+    height: 25px;
+    font-size: 8px;
+  }
+  .second_search > button{
+    width: 30px;
+    height: 25px;
+  }
+  .second_search > button > img{
+    width: 25px;
+    height:25px;
+  }
+  .second_image{
+    height: 220px;
+
+    
+  }
+  .second_image > img {
+    height: 100%;
+    
+  }
+  .third{
+    width: 500px;
+     
+  }
+  .third_out{
+    margin-top: 20px;
+  }
+  
+  
+}
+@media only screen and (max-width:500px){
+
+  nav {
+    width: 360px; 
   }
   nav > button{
     float: right;
@@ -250,25 +345,31 @@ footer > h3 {
     border:0px;
     margin: 20px 5px 20px;
     font-size: 16px;
-   
+  
 }
   .second{
+    width: auto;
     height: 280px;
   }
   .second_size{
-    width: 340px; 
+    width: 360px; 
     height: 280px;
-   
-
+  
   }
   .second_content{
+    z-index: 2;
+    position: absolute;
     
-    width: 360px;
-    z-index:2 ;
   }
-
+  .second_content > h1{
+    font-size: 28px;
+    line-height: 24px;
+  }
   .second_content > h3{
     font-size: 16px;
+    line-height: 13px;
+    font-weight:normal;
+
   }
   .second_search{
     float: left;
@@ -276,23 +377,34 @@ footer > h3 {
   .second_search > input{
     width: 230px;
     height: 46px;
-  
+    font-size: 16px;
   }
-  .second_image{
-    position:absolute;
-    z-index:1 ;
-    right: -68px;
-    bottom:58.0%;
-
-    
+  .second_search > button{
+    width: 63px;
+    height: 46px;
   }
-  .second_image{
-    width: 276px;
-    height: 148px;
+  .second_search > button > img{
+    width: 30px;
+    height: 30px;
+  }
+ .second_image{
+  position: absolute;
+   width: 100%;
+   height: 280px;
+   overflow: hidden;
+ }
+  .second_image > img{
+    z-index: 1;
+    position: absolute;
+    Width :276px;
+    Height :148px;
     overflow: hidden;
+    top: 132px;
+    left: 160px;
   }
+
   .third{
-    width: 340px;
+    width: 360px;
      
   }
 }
