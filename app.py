@@ -19,6 +19,7 @@ def attraction(id):
 @app.route("/api/attractions",methods=['GET'])
 def api_attractions():
 	page = request.args.get('page')
+	print('page',page)
 	if page == None:
 		page = 0
 	keyword = request.args.get('keyword')
@@ -36,21 +37,17 @@ def api_attractions():
 		sql = "select * from level2 LIMIT {}, 13; ".format(page_start_time)
 		if keyword != None:
 			sql = "select * from level2 where name LIKE '%{}%'; ".format(keyword)
-			if page != None:
-				sql = "select  COUNT(id) from level2 where name LIKE '%{}%'; ".format(keyword); 
-				cursor.execute(sql)
-				id_count = cursor.fetchall()
-				page_start = int(page)
-				page_max = id_count[0][0]/12
-				if page_start <= page_max:
-					page_start_time = page_start*12
-					sql = "select * from level2 where name LIKE '%{}%' LIMIT {}, 13; ".format(keyword,page_start_time)
-				else:
-					msg = "超出頁面"
-					data = {
-					"message":msg
-					}
-					return jsonify({'data':data})
+			
+			print(keyword)
+			if page_start <= page_max:
+				page_start_time = page_start*12
+				sql = "select * from level2 where name LIKE '%{}%' LIMIT {}, 13; ".format(keyword,page_start_time)
+			else:
+				msg = "超出頁面"
+				data = {
+				"message":msg
+				}
+				return jsonify({'data':data})
 		cursor.execute(sql)
 		id_data = cursor.fetchall()
 		if id_data !=[]:
