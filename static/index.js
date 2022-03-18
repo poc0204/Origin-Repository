@@ -1,7 +1,7 @@
-let start_data
-let page
-let start_time 
-let end_time
+let start_data = [] ;
+let page = [] ;
+let start_time  = [] ;
+let end_time = [] ;
 document.addEventListener("DOMContentLoaded",function(){
   page = 0 ;
   fetch(`http://3.87.217.170:3000/api/attractions?page=${page}`, {method: 'get'})
