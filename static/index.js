@@ -104,7 +104,9 @@ function select_click(){
    
   }
   else{
-        fetch(`http://3.87.217.170:3000/api/attractions??keyword=${keyword.value}`, {method: 'get'})
+
+        fetch(`http://3.87.217.170:3000/api/attractions?keyword=${keyword.value}`, {method: 'get'})
+
         .then(response =>{
           return  response.json()
       })
