@@ -1,0 +1,493 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+* reset */
+body, h1, ul { margin: 0px; }
+
+*{box-sizing: border-box;}
+body{
+  margin: 0px;
+  
+}
+header{
+    display:flex;
+    width: 100%;
+    justify-content: center;
+    height: 62px;
+ 
+}
+/* NavBar */
+nav {
+  
+    background:white;
+    width: 1200px;  
+}
+nav > a > h1{
+    float: left;
+    margin: 10px 0px 10px;
+    color: #448899;
+    padding: 0px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 34px;
+}
+
+nav > button{
+    float: right;
+    padding: 0px;
+    background-color: white;
+    border:0px;
+    margin: 20px 10px 20px;
+    font-size: 16px;
+}
+.second{
+  width:100%;
+  display: flex;
+  justify-content: center;
+     
+}
+.second_size{
+  width: 1200px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-bottom-width: 1px;
+  border-bottom-color: gray;
+  border-bottom-style: solid;
+}
+
+.second_imgs{
+  width: 540px;
+  height: 440px;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+ 
+}
+.mySlides {
+  display: block;
+}
+
+.second_imgs > div > img{
+  width: 540px;
+  height: 440px;
+  border-radius: 10px;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  margin-top: -22px;
+  padding: 1px;
+  color:#757575;
+  font-weight: bold;
+  font-size: 19px;
+  transition: 0.6s ease;
+  border-radius: 20px;
+  width: 30px;
+  height: 30px;
+  background: white;
+  opacity: 0.5;
+}
+.dot_place{
+  position: absolute;
+  top: 95%;
+  width: auto;
+  left: 44%;
+}
+/* 将”下一张“的按钮定位在右边 */
+.next {
+  right: 5px;
+  top:50.2%;
+}
+.prev{
+  left: 5px;
+  
+}
+/* 鼠标移到按钮上，增加一个有点透明的黑色背景 */
+.prev:hover, .next:hover {
+  color: rgba(0,0,0,0.8);
+  opacity: 1;
+}
+
+/* 底部的指示按钮 */
+.dot {
+  cursor:pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 2px;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+
+}
+
+.active, .dot:hover {
+  background-color: black;
+  
+}
+
+/* 淡入淡出的动画 */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+.second_content{
+  text-align: start;
+}
+.second_content > h2{
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  color: #666666;
+
+}
+.second_h5 {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px 0px 20px;
+}
+
+.second_h5 > h5{
+  margin: 2px;
+  font-size:  16px;
+  font-family: 'Noto Sans TC';
+  color: #666666;
+  font-style: normal;
+  font-weight:normal;
+}
+.booking{
+  width: 600px;
+  height: 302px;
+  background: rgba(232, 232, 232, 1);
+  border-radius:10px;
+  padding: 16px;
+}
+.booking > h3 {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-size: 16px;
+  color: #666666;
+}
+.booking > h4 {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-size: 16px;
+  color: #666666;
+  font-weight:normal;
+  display:inline;
+}
+.booking > p {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: #666666;
+  display: inline-flex;
+  margin: 10px 0px;
+}
+
+input[type='radio'] {
+  margin: 5px;
+  width:20px;
+  height:20px;
+}
+
+
+.booking > button {
+  width: 154px;
+  height: 33px;
+  background:#448899;
+  border-radius: 5px;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 19px;
+  display: flex;
+  color: #FFFFFF;
+  justify-content: center;
+  border: #FFFFFF;
+  margin-top: 5px;
+
+}
+.third{
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
+.third_size{
+  width: 1200px;
+  height: 500px;
+
+}
+.third_size > h3 {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-size: 16px;
+  color: #666666;
+  margin: 0px;
+  font-weight:normal;
+}
+#description{
+  margin: 50px 0px 20px 0px;
+}
+.third_size > h2 {
+
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight:bold ;
+  font-size: 16px;
+  color: #666666;
+  font-weight:bold;
+  margin-bottom: 0px;
+}
+footer{
+    width: 100%;
+    background-color: #757575;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  footer > h3 {
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-size: 16px;
+    color: #FFFFFF;
+  }
+
+  @media only screen and (max-width:1250px){
+    nav {
+      width: 1000px; 
+    }
+    .second_size{
+      width: 1000px; 
+    }
+
+    .second_imgs{
+
+      margin-right: 15px;
+    }
+    .second_imgs > div > img{
+      width: 485px;
+    }
+
+    .second_content .booking{
+      width: 500px;
+    }
+    .third_size{
+      width: 1000px;
+       
+    }
+    #description {
+      margin: 30px 0px 20px 0px;
+  }
+}
+
+@media only screen and (max-width:1000px){
+  nav {
+    width: 800px; 
+  }
+  .second_size{
+
+    width: 800px;
+    height: 370px;
+  }
+  .second_imgs{
+    width: 380px;
+    height: 250px;
+    margin: 10px;
+  }
+  .second_imgs > div > img{
+    width: 380px;
+    height: 250px;
+  }
+
+  .second_content .booking{
+    width: 400px;
+  }
+  .third_size{
+    width: 800px;
+     
+  }
+  .prev, .next{
+    width: 25px;
+    height: 25px;
+    font-size: 17px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    
+  }
+  .dot_place{
+    top: 90%;
+  }
+  #name{
+    font-size: 20px;
+    margin: 0px;
+    margin-bottom: 5px;
+  }
+  .second_h5{
+    margin: 5px 0px;
+ 
+  }
+  .booking{
+    width: 365px;
+    height: auto;
+  }
+
+}
+
+@media only screen and (max-width:800px){
+  nav {
+    width: 600px; 
+  }
+  
+  .second_size{
+    display: block;
+    width: 600px;
+    height: auto;
+    margin: 0px;
+    
+  }
+  .second_imgs{
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+    margin: 0px;
+    margin-bottom: 25px;
+  }
+  .second_imgs > div > img{
+    width: 600px;
+    height: 400px;
+  }
+  .prev, .next{
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+  }
+  .dot_place{
+    top: 94%;
+  }
+  .second_content{
+    display: block;
+  }
+
+  .second_content .booking{
+    width: 600px;
+  }
+  .second_h5{
+    margin: 10px 0px;
+  }
+  .third_size{
+    width: 600px;
+    height: auto;
+    margin-bottom: 30px;
+  }
+  .booking{
+    margin-bottom: 60px
+  }
+  .booking > h3  {
+    font-size: 16px;
+    }
+  .booking > h4 {
+    font-size: 16px;
+    }
+  .booking > p {
+    font-size: 16px;
+    }
+  input[type='radio'] {
+    width: 20px;
+  }
+  .booking > button {
+    font-size: 16px;
+    width: 161px;
+    height: 29px;
+    }
+
+}
+
+@media only screen and (max-width:600px){
+  nav {
+    width: 360px; 
+  }
+  
+  .second_size{
+    display: block;
+    width: 360px;
+    height: auto;
+    margin: 0px;
+    
+  }
+  .second_imgs{
+    width: 360px;
+    height: 260px;
+    overflow: hidden;
+    margin: 0px;
+    margin-bottom: 25px;
+  }
+  .second_imgs > div > img{
+    width: 360px;
+    height: 260px;
+  }
+  .prev, .next{
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+  }
+  .dot_place{
+    top: 91%;
+  }
+  .second_content{
+    display: block;
+  }
+  .second_content .booking{
+    width: 360px;
+  }
+  .third_size{
+    width: 360px;
+    height: auto;
+     
+  }
+  .booking{
+    margin-bottom: 60px
+  }
+  .booking > h3  {
+    font-size: 16px;
+    }
+  .booking > h4 {
+    font-size: 16px;
+    }
+  .booking > p {
+    font-size: 16px;
+    }
+  input[type='radio'] {
+    width: 20px;
+  }
+  .booking > button {
+    font-size: 16px;
+    width: 161px;
+    height: 29px;
+    }
+
+}
+

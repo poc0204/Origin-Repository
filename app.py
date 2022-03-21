@@ -1,4 +1,7 @@
+from datetime import date
 from pprint import pprint
+from urllib import response
+from wsgiref.util import request_uri
 from flask import Flask ,redirect,url_for ,render_template , request , session  , make_response,jsonify
 import json , re
 import mysql.connector
@@ -124,8 +127,9 @@ def api_attraction(id):
 			"images":data_images
 			}
 			}
-
-		return jsonify({'data':data}) 
+	
+	
+		return jsonify({'data':data})
 	else:
 		msg = "景點編號不正確"
 		data = {

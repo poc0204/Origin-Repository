@@ -104,7 +104,9 @@ function select_click(){
    
   }
   else{
+
         fetch(`http://3.87.217.170:3000/api/attractions?keyword=${keyword.value}`, {method: 'get'})
+
         .then(response =>{
           return  response.json()
       })
@@ -147,26 +149,34 @@ function show_img(start_time,end_time,data){
       all_data_div.class = "show_data";
       all_data_div.id = "show_data"+[i];
       third.appendChild(all_data_div);
+
+      let a_herf = document.createElement("a");
+      a_herf.href="http://3.87.217.170:3000/attraction/"+data['data'][j]['id'];
+      a_herf.id = "a_herf"+[i];
+            
       let show_data = document.getElementById("show_data"+[i])
+      show_data.appendChild(a_herf);
+
+      let a_herf_push = document.getElementById("a_herf"+[i])
       let show_img = document.createElement("img"); 
       show_img.src=data['data'][j]['images'][0];
-      show_data.appendChild(show_img);
+      a_herf_push.appendChild(show_img);
 
       
       let third_p = document.createElement("p");
       third_p.className = "third_p";
       third_p.innerHTML = data['data'][j]['name'];
-      show_data.appendChild(third_p);
+      a_herf_push.appendChild(third_p);
 
       let third_a_right = document.createElement("a");
       third_a_right.className = "third_a_right";
       third_a_right.innerHTML = data['data'][j]['category'];
-      show_data.appendChild(third_a_right);
+      a_herf_push.appendChild(third_a_right);
 
       let third_a_left = document.createElement("a");
       third_a_left.className = "third_a_left";
       third_a_left.innerHTML = data['data'][j]['mrt'];
-      show_data.appendChild(third_a_left);
+      a_herf_push.appendChild(third_a_left);
       j =j+1;
       }
 }

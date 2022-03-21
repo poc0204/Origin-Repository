@@ -38,7 +38,7 @@ nav > button{
     background-color: white;
     border:0px;
     margin: 20px 10px 20px;
-   
+   font-size: 16px;
 }
 .second{
   background:linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
@@ -138,7 +138,10 @@ justify-content: center;
     border-color:rgba(232, 232, 232, 1);
     margin: 15px;
   }
-.third >  div > img {
+.third >  div > a {
+  text-decoration:none;
+}
+.third >  div > a > img {
       width: 269px;
       height: 160px;
       border-top-left-radius:5px;
@@ -148,7 +151,7 @@ justify-content: center;
   text-align: left;
   width: 100%;
   margin: 0px;
-  font-size: 16px;
+  font-size: 15px;
   color: #757575;
   font-family: 'Noto Sans TC';
   font-style: normal;
