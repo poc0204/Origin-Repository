@@ -8,21 +8,48 @@
     <script src="{{ url_for('static', filename='index.js') }}" type="text/javascript" ></script> 
     <title>Document</title>
 </head>
-<body>
-    <header >
+<body> 
+    <header>
+        <div class="dialog" id="dialog"></div>              
+            <div class="login_dialog_size" id="login_dialog_size">
+                <div class="login_dialog" id="login_dialog">
+                    <div class="close" id="close" onclick ="close_login_dialog()"><img src="{{ url_for('static', filename='images/close.png')}}"></div>
+                    <h1>登入會員帳號</h1>
+                    <input type="email" id="member_email" placeholder="輸入電子信箱" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/ />
+                    <input type="password" id="member_password"  placeholder="輸入密碼" ></br>
+                    <button onclick="login_member_click()" >登入帳戶</button>
+                    <h3 id="error_massage"></h3>
+                    <button class="new_member" onclick="new_member_click()" >還沒有帳戶？點此註冊</button>
+                    
+                </div>
+                <div class="new_member_dialog" id="new_member_dialog">
+                    <div class="close" id="close" onclick ="close_login_dialog()"><img src="{{ url_for('static', filename='images/close.png')}}"></div>
+                        <h1>註冊會員帳號</h1>
+                        <input type="text" id="new_member_name" placeholder="輸入姓名" >
+                        <input type="email" id="new_member_email" placeholder="輸入電子信箱" >
+                        <input  type="password" id="new_member_password" placeholder="輸入密碼" ></br>
+                        <button onclick="create_new_member_click()">註冊新帳戶</button></br>
+                        <h3 id="new_member_error_massage"></h3>
+                        <button class="login_agin" onclick="login_agin_click()" >已經有帳戶了？點此登入</button>
+
+                </div>
+        </div>    
         <nav id="nav">
             <a href="/"><h1 >台北一日遊</h1></a>
-            <button>登入/註冊</button>
-            <button>預定行程</button>
+            <button class="login" id="login" onclick="login_click()">登入/註冊</button>
+            <button class="loginout" id ="loginout" onclick="loginout_click()">登出系統</button>
+            <button >預定行程</button>
         </nav>
+        
     </header>
+    {% block header %}
     <second class="second">
         <div class="second_size">
             <div class="second_content">
                 <h1>輕鬆享受台北一日悠閒</h1>
                 <h3>探索每個角落，體驗城市的深度旅遊行程</h3>
                 <div class="second_search">
-                    <input id="keyword" name = "keyword" placeholder=" 輸入景點名稱查詢"  type="text"></input>
+                    <input id="keyword" name = "keyword" placeholder="輸入景點名稱查詢"  type="text"></input>
                     <button class="search_btn" onclick="select_click()" ><img src="{{ url_for('static', filename='images/seach.png')}}" ></button>
                 </div>
             </div>
@@ -41,5 +68,6 @@
     <footer>
         <h3>COPYRIGHT © 2021 台北一日遊</h3>
     </footer>
+    {% endblock %}
 </body>
 </html>

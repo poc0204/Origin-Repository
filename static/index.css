@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
 * reset */
 body, h1, ul { margin: 0px; }
-
+button { cursor: pointer;   }
 *{box-sizing: border-box;}
 body{
   margin: 0px;
@@ -16,7 +16,6 @@ header{
 }
 /* NavBar */
 nav {
-  
     background:white;
     width: 1200px;  
 }
@@ -39,6 +38,145 @@ nav > button{
     border:0px;
     margin: 20px 10px 20px;
    font-size: 16px;
+}
+nav > .loginout{
+  display: none;
+}
+.dialog{
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: fixed;
+  justify-content: center;
+  background-color: #757575;
+  opacity :0.5;
+ z-index: 99;
+}
+.login_dialog_size{
+  width: 340px;
+  height: auto;
+  background-color: white;
+  top: 80px;
+  position:fixed;
+  z-index: 100;
+}
+.close{
+  right: 0px;
+}
+
+.login_dialog{
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+ display: none;
+}
+.login_dialog > h1{
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  color: #666666;
+}
+.login_dialog > input{
+  margin-bottom: 10px;
+  width: 310px;
+  height: 47px;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  box-sizing: border-box;
+  border-radius: 5px;
+  letter-spacing:1px;
+  padding: 8px;
+  font-weight: 400;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+}
+.login_dialog > button{
+  margin-bottom: 10px;
+  width: 310px;
+  height: 47px;
+  background: rgba(68, 136, 153, 1);
+  border-width: 0px;
+  border-radius:10px;
+  color: white;
+  font-size: 19px;
+}
+.login_dialog > .new_member{
+  font-size: 16px;
+  color: #666666;
+  background-color: white;
+}
+.login_dialog > .close{
+  position: absolute;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  right: 16px;
+}
+.login_dialog > .close > img{
+  width: 16px;
+  height: 16px;
+}
+.login_dialog > #error_massage{
+  display: none;
+}
+.login_dialog > #new_member_error_massage{
+  display: none;
+}
+#new_member_dialog{
+  display: none;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.new_member_dialog > h1{
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  color: #666666;
+}
+.new_member_dialog > input{
+  margin-bottom: 10px;
+  width: 310px;
+  height: 47px;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  box-sizing: border-box;
+  border-radius: 5px;
+  letter-spacing:1px;
+  padding: 8px;
+  font-weight: 400;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+}
+.new_member_dialog > button{
+  margin-bottom: 10px;
+  width: 310px;
+  height: 47px;
+  background: rgba(68, 136, 153, 1);
+  border-width: 0px;
+  border-radius:10px;
+  color: white;
+  font-size: 19px;
+}
+.new_member_dialog > .login_agin{
+  font-size: 16px;
+  color: #666666;
+  background-color: white;
+}
+.new_member_dialog > .close{
+  position: absolute;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  right: 16px;
+}
+.new_member_dialog > .close > img{
+  width: 16px;
+  height: 16px;
 }
 .second{
   background:linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);
@@ -85,6 +223,8 @@ nav > button{
   font-size: 16px;
   line-height: 13px;
   color: #757575;
+  letter-spacing:1px;
+  padding: 10px;
 }
 .second_search > button{
   padding: 0px;

@@ -40,13 +40,13 @@ nav > button{
     margin: 20px 10px 20px;
     font-size: 16px;
 }
-.second{
+.second_attraction{
   width:100%;
   display: flex;
   justify-content: center;
      
 }
-.second_size{
+.second_attraction_size{
   width: 1200px;
   height: 500px;
   display: flex;
@@ -58,7 +58,7 @@ nav > button{
   border-bottom-style: solid;
 }
 
-.second_imgs{
+.second_attraction_imgs{
   width: 540px;
   height: 440px;
   position: relative;
@@ -70,7 +70,7 @@ nav > button{
   display: block;
 }
 
-.second_imgs > div > img{
+.second_attraction_imgs > div > img{
   width: 540px;
   height: 440px;
   border-radius: 10px;
@@ -149,10 +149,10 @@ nav > button{
   to {opacity: 1}
 }
 
-.second_content{
+.second_attraction_content{
   text-align: start;
 }
-.second_content > h2{
+.second_attraction_content > h2{
   font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 700;
@@ -210,7 +210,11 @@ input[type='radio'] {
   width:20px;
   height:20px;
 }
-
+input[type='date']{
+  padding: 2px;
+  border: 0; 
+  
+}
 
 .booking > button {
   width: 154px;
@@ -228,17 +232,17 @@ input[type='radio'] {
   margin-top: 5px;
 
 }
-.third{
+.third_attraction{
   width:100%;
   display: flex;
   justify-content: center;
 }
-.third_size{
+.third_size_attraction{
   width: 1200px;
   height: 500px;
 
 }
-.third_size > h3 {
+.third_size_attraction > h3 {
   font-family: 'Noto Sans TC';
   font-style: normal;
   font-size: 16px;
@@ -249,7 +253,7 @@ input[type='radio'] {
 #description{
   margin: 50px 0px 20px 0px;
 }
-.third_size > h2 {
+.third_size_attraction > h2 {
 
   font-family: 'Noto Sans TC';
   font-style: normal;
@@ -278,22 +282,22 @@ footer{
     nav {
       width: 1000px; 
     }
-    .second_size{
+    .second_attraction_size{
       width: 1000px; 
     }
 
-    .second_imgs{
+    .second_attraction_imgs{
 
       margin-right: 15px;
     }
-    .second_imgs > div > img{
+    .second_attraction_imgs > div > img{
       width: 485px;
     }
 
-    .second_content .booking{
+    .second_attraction_content .booking{
       width: 500px;
     }
-    .third_size{
+    .third_size_attraction{
       width: 1000px;
        
     }
@@ -306,25 +310,25 @@ footer{
   nav {
     width: 800px; 
   }
-  .second_size{
+  .second_attraction_size{
 
     width: 800px;
     height: 370px;
   }
-  .second_imgs{
+  .second_attraction_imgs{
     width: 380px;
     height: 250px;
     margin: 10px;
   }
-  .second_imgs > div > img{
+  .second_attraction_imgs > div > img{
     width: 380px;
     height: 250px;
   }
 
-  .second_content .booking{
+  .second_attraction_content .booking{
     width: 400px;
   }
-  .third_size{
+  .third_size_attraction{
     width: 800px;
      
   }
@@ -362,21 +366,21 @@ footer{
     width: 600px; 
   }
   
-  .second_size{
+  .second_attraction_size{
     display: block;
     width: 600px;
     height: auto;
     margin: 0px;
     
   }
-  .second_imgs{
+  .second_attraction_imgs{
     width: 600px;
     height: 400px;
     overflow: hidden;
     margin: 0px;
     margin-bottom: 25px;
   }
-  .second_imgs > div > img{
+  .second_attraction_imgs > div > img{
     width: 600px;
     height: 400px;
   }
@@ -388,17 +392,17 @@ footer{
   .dot_place{
     top: 94%;
   }
-  .second_content{
+  .second_attraction_content{
     display: block;
   }
 
-  .second_content .booking{
+  .second_attraction_content .booking{
     width: 600px;
   }
   .second_h5{
     margin: 10px 0px;
   }
-  .third_size{
+  .third_size_attraction{
     width: 600px;
     height: auto;
     margin-bottom: 30px;
@@ -431,21 +435,21 @@ footer{
     width: 360px; 
   }
   
-  .second_size{
+  .second_attraction_size{
     display: block;
     width: 360px;
     height: auto;
     margin: 0px;
     
   }
-  .second_imgs{
+  .second_attraction_imgs{
     width: 360px;
     height: 260px;
     overflow: hidden;
     margin: 0px;
     margin-bottom: 25px;
   }
-  .second_imgs > div > img{
+  .second_attraction_imgs > div > img{
     width: 360px;
     height: 260px;
   }
@@ -457,16 +461,17 @@ footer{
   .dot_place{
     top: 91%;
   }
-  .second_content{
+  .second_attraction_content{
     display: block;
+    
   }
-  .second_content .booking{
+  .second_attraction_content .booking{
     width: 360px;
   }
-  .third_size{
+  .third_size_attraction{
     width: 360px;
     height: auto;
-     
+   
   }
   .booking{
     margin-bottom: 60px

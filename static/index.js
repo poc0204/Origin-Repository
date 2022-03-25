@@ -4,10 +4,11 @@ let start_time  = [] ;
 let end_time = [] ;
 document.addEventListener("DOMContentLoaded",function(){
   page = 0 ;
-  fetch(`http://3.87.217.170:3000/api/attractions?page=${page}`, {method: 'get'})
+  fetch(`http://127.0.0.1:3000/api/attractions?page=${page}`, {method: 'get'})
   .then(response =>{
     return  response.json()
   })
+
  .then( data =>{
   start_time = 0 ;
   end_time = 11 ;
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded",function(){
           page = page+1;
               if(keyword.value !=''){ 
 
-                fetch(`http://3.87.217.170:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
+                fetch(`http://127.0.0.1:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
                 .then(response =>{
                   return  response.json()
                 })
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded",function(){
          
               }
               else{
-              fetch(`http://3.87.217.170:3000/api/attractions?page=${page}`, {method: 'get'})
+              fetch(`http://127.0.0.1:3000/api/attractions?page=${page}`, {method: 'get'})
               .then(response =>{
                 return  response.json()
               })
@@ -84,27 +85,50 @@ document.addEventListener("DOMContentLoaded",function(){
       
     })
       })
+  fetch('http://127.0.0.1:3000/api/user', {method: 'get'})
+  .then(response =>{
+    return  response.json()
+  })
+  .then( data =>{
+    if(data['data']['email'] === null){
+      let login = document.getElementById("login")
+      let loginout = document.getElementById("loginout")
+      login.style.display = "block";
+      loginout.style.display = "none";
+    }
+    else{
+      let dialog = document.getElementById("dialog")
+      let login_dialog = document.getElementById("login_dialog")
+      dialog.style.display="none";
+      login_dialog.style.display="none";
+      let login = document.getElementById("login")
+      let loginout = document.getElementById("loginout")
+      login.style.display = "none";
+      loginout.style.display = "block";
+      document.body.style.overflow = 'scroll' ;
 
+    }
+  })
 })
 
 window.onscroll=function(){
 
   let nav = document.getElementById("nav");//獲取到導航欄id
   nav.style.top = '0';
-  nav.style.zIndex = '9999';
+  nav.style.zIndex = '10';
   nav.style.position = 'fixed';
   }
 
 
 function select_click(){
   let keyword = document.getElementById("keyword");
-  page = '';
+  page = 0 
   if(keyword.value == '' ){
     no_data();
    
   }
   else{
-        fetch(`http://3.87.217.170:3000/api/attractions??keyword=${keyword.value}`, {method: 'get'})
+        fetch(`http://127.0.0.1:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
         .then(response =>{
           return  response.json()
       })
@@ -149,7 +173,7 @@ function show_img(start_time,end_time,data){
       third.appendChild(all_data_div);
 
       let a_herf = document.createElement("a");
-      a_herf.href="http://3.87.217.170:3000/attraction/"+data['data'][j]['id'];
+      a_herf.href="http://127.0.0.1:3000/attraction/"+data['data'][j]['id'];
       a_herf.id = "a_herf"+[i];
             
       let show_data = document.getElementById("show_data"+[i])
@@ -186,4 +210,170 @@ function no_data(){
   third_p.className = "third_p";
   third_p.innerHTML ="查無景點，請重新輸入"
   div_delet.appendChild(third_p);
+}
+
+function login_click(){
+  let dialog = document.getElementById("dialog")
+  dialog.style.display="flex";
+  let login_dialog = document.getElementById("login_dialog")
+  login_dialog.style.display="block";
+  document.body.style.overflow = 'hidden' ;
+
+}
+function close_login_dialog(){
+  let dialog = document.getElementById("dialog")
+  dialog.style.display="none";
+  let login_dialog = document.getElementById("login_dialog")
+  login_dialog.style.display="none";
+  let new_member_dialog = document.getElementById("new_member_dialog")
+  new_member_dialog.style.display="none";
+  document.body.style.overflow = 'scroll' ;
+}
+function new_member_click(){
+  let login_dialog = document.getElementById("login_dialog")
+  login_dialog.style.display="none";
+  let new_member_dialog = document.getElementById("new_member_dialog")
+  new_member_dialog.style.display="block";
+  
+}
+function login_agin_click(){
+  let login_dialog = document.getElementById("login_dialog")
+  login_dialog.style.display="block";
+  let new_member_dialog = document.getElementById("new_member_dialog")
+  new_member_dialog.style.display="none";
+}
+
+function login_member_click(){
+    let email = document.getElementById("member_email")
+    let password = document.getElementById("member_password")
+    let error_massage = document.getElementById("error_massage")
+
+    if(IsEmail(email.value) === false){
+      error_massage.style.display='block';
+      error_massage.innerHTML = "信箱格式錯誤"
+      
+    }
+    else if(email.value === "" || password.value === "" ){
+      
+      error_massage.style.display='block';
+      error_massage.innerHTML = "信箱、密碼不能為空"
+    }
+    else{
+      error_massage.style.display= "none" ;
+      let member_data = {
+        'email':email.value,
+        'password':password.value,
+      }
+      let url = `http://127.0.0.1:3000/api/user`;
+      fetch(url, 
+      {
+        method: 'PATCH',
+        body:JSON.stringify(member_data),  
+        headers:{
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(response =>{
+            return  response.json()
+      })
+      .then( data =>{
+        if(data['error'] === true){
+          error_massage.style.display='block';
+          error_massage.innerHTML = data['message']
+        }
+        else{
+          fetch(url,{method: 'GET'})
+          .then(response =>{
+            return  response.json()
+          })
+          .then( data =>{
+    
+            if(data['data']['email'] === null){
+              let login = document.getElementById("login")
+              let loginout = document.getElementById("loginout")
+              login.style.display = "block";
+              loginout.style.display = "none";
+            }
+            else{
+              let dialog = document.getElementById("dialog")
+              let login_dialog = document.getElementById("login_dialog")
+              dialog.style.display="none";
+              login_dialog.style.display="none";
+              let login = document.getElementById("login")
+              let loginout = document.getElementById("loginout")
+              login.style.display = "none";
+              loginout.style.display = "block";
+              document.body.style.overflow = 'scroll' ;
+
+            }
+          })
+        }
+      })
+
+    }
+}
+
+function create_new_member_click(){
+  let new_member_name = document.getElementById("new_member_name")
+  let new_member_email = document.getElementById("new_member_email")
+  let new_member_password = document.getElementById("new_member_password")
+  let new_member_error_massage = document.getElementById("new_member_error_massage")
+  if(new_member_name.value === "" || new_member_email.value === ""  || new_member_password.value ===""){
+    new_member_error_massage.style.display='block';
+    new_member_error_massage.innerHTML = "姓名、信箱、密碼不能為空"
+  }
+  else if(IsEmail(new_member_email.value) === false){
+    new_member_error_massage.style.display='block';
+    new_member_error_massage.innerHTML = "信箱格式錯誤";
+  }
+  else{
+      let member_data = {
+        'name':new_member_name.value,
+        'email':new_member_email.value,
+        'password':new_member_password.value,
+      }
+      let url =`http://127.0.0.1:3000/api/user`;
+      fetch(url, 
+      {
+        method: 'POST',
+        body:JSON.stringify(member_data),  
+        headers:{
+        'Content-Type': 'application/json'
+      }
+      })
+      .then(response =>{
+        return  response.json()
+      })
+      .then( data =>{
+        if(data['error'] === true){
+          new_member_error_massage.style.display='block';
+          new_member_error_massage.innerHTML = data['message']
+        }
+        else{
+          new_member_error_massage.style.display='block';
+          new_member_error_massage.innerHTML = '註冊成功'
+
+        }
+      })
+  }
+
+}
+
+function loginout_click(){
+  let login = document.getElementById("login")
+  let loginout = document.getElementById("loginout")
+  login.style.display = "block";
+  loginout.style.display = "none";
+  let url = `http://127.0.0.1:3000/api/user`;
+  fetch(url, {method:'DELETE'})
+
+}
+
+function IsEmail(email) {
+  let regex =  /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/; 
+  if(!regex.test(email)) {
+    return false;
+  }else{
+    return true;
+  }
 }
