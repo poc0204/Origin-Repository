@@ -5,7 +5,7 @@ id_number = id_number.substring(33,100)
 
 
 
-fetch(`http://127.0.0.1:3000//api/attractions/${id_number}`, {method: 'get'})
+fetch(`http://3.87.217.170:3000/api/attractions/${id_number}`, {method: 'get'})
 .then(response =>{
   return  response.json()
 })

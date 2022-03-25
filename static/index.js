@@ -4,7 +4,7 @@ let start_time  = [] ;
 let end_time = [] ;
 document.addEventListener("DOMContentLoaded",function(){
   page = 0 ;
-  fetch(`http://127.0.0.1:3000/api/attractions?page=${page}`, {method: 'get'})
+  fetch(`http://3.87.217.170:3000/api/attractions?page=${page}`, {method: 'get'})
   .then(response =>{
     return  response.json()
   })
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded",function(){
           page = page+1;
               if(keyword.value !=''){ 
 
-                fetch(`http://127.0.0.1:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
+                fetch(`http://3.87.217.170:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
                 .then(response =>{
                   return  response.json()
                 })
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded",function(){
          
               }
               else{
-              fetch(`http://127.0.0.1:3000/api/attractions?page=${page}`, {method: 'get'})
+              fetch(`http://3.87.217.170:3000/api/attractions?page=${page}`, {method: 'get'})
               .then(response =>{
                 return  response.json()
               })
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded",function(){
       
     })
       })
-  fetch('http://127.0.0.1:3000/api/user', {method: 'get'})
+  fetch('http://3.87.217.170:3000/api/user', {method: 'get'})
   .then(response =>{
     return  response.json()
   })
@@ -128,7 +128,7 @@ function select_click(){
    
   }
   else{
-        fetch(`http://127.0.0.1:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
+        fetch(`http://3.87.217.170:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
         .then(response =>{
           return  response.json()
       })
@@ -173,7 +173,7 @@ function show_img(start_time,end_time,data){
       third.appendChild(all_data_div);
 
       let a_herf = document.createElement("a");
-      a_herf.href="http://127.0.0.1:3000/attraction/"+data['data'][j]['id'];
+      a_herf.href="http://3.87.217.170:3000/attraction/"+data['data'][j]['id'];
       a_herf.id = "a_herf"+[i];
             
       let show_data = document.getElementById("show_data"+[i])
@@ -264,7 +264,7 @@ function login_member_click(){
         'email':email.value,
         'password':password.value,
       }
-      let url = `http://127.0.0.1:3000/api/user`;
+      let url = `http://3.87.217.170:3000/api/user`;
       fetch(url, 
       {
         method: 'PATCH',
@@ -332,7 +332,7 @@ function create_new_member_click(){
         'email':new_member_email.value,
         'password':new_member_password.value,
       }
-      let url =`http://127.0.0.1:3000/api/user`;
+      let url =`http://3.87.217.170:3000/api/user`;
       fetch(url, 
       {
         method: 'POST',
@@ -364,7 +364,7 @@ function loginout_click(){
   let loginout = document.getElementById("loginout")
   login.style.display = "block";
   loginout.style.display = "none";
-  let url = `http://127.0.0.1:3000/api/user`;
+  let url = `http://3.87.217.170:3000/api/user`;
   fetch(url, {method:'DELETE'})
 
 }
