@@ -1,5 +1,6 @@
 from datetime import date
 from pprint import pprint
+from telnetlib import PRAGMA_HEARTBEAT
 from urllib import response
 from wsgiref.util import request_uri
 from flask import Flask ,redirect,url_for ,render_template , request , session  , make_response,jsonify
@@ -8,7 +9,7 @@ import mysql.connector
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
-
+app.config['SECRET_KEY'] = "usertest"
 # Pages
 @app.route("/")
 def index():
@@ -21,8 +22,7 @@ def attraction(id):
 
 @app.route("/api/attractions",methods=['GET'])
 def api_attractions():
-	page = request.args.get('page')
-	print('page',page)
+	page = request.args.get('page')	
 	if page == None:
 		page = 0
 	keyword = request.args.get('keyword')
@@ -40,8 +40,6 @@ def api_attractions():
 		sql = "select * from level2 LIMIT {}, 13; ".format(page_start_time)
 		if keyword != None:
 			sql = "select * from level2 where name LIKE '%{}%'; ".format(keyword)
-			
-			print(keyword)
 			if page_start <= page_max:
 				page_start_time = page_start*12
 				sql = "select * from level2 where name LIKE '%{}%' LIMIT {}, 13; ".format(keyword,page_start_time)
@@ -53,6 +51,7 @@ def api_attractions():
 				return jsonify({'data':data})
 		cursor.execute(sql)
 		id_data = cursor.fetchall()
+		
 		if id_data !=[]:
 			for i in range(len(id_data)):
 				data_images =[]
@@ -140,6 +139,74 @@ def api_attraction(id):
 
 		return jsonify({'data':data}) ,400
 
+
+@app.route("/api/user",methods = ['GET', 'POST', 'PATCH', 'DELETE'])
+def api_user():
+	if request.method == 'GET':
+		print('GET')
+		id = session.get('id')
+		name = session.get('name')
+		email = session.get('email')
+	
+		return jsonify({"data":{"id":id,"name":name,"email":email}}),200
+
+	if request.method == 'PATCH':
+		print('PATCH')
+		data = json.loads(request.data)
+		member_email = data['email']
+		member_password = data['password']
+		try:
+			connection = link_mysql()
+			cursor = connection.cursor()
+		except:
+			return jsonify({"error":True ,"message": "伺服器內部錯誤"}) , 500
+		sql = " select * from level2member where email = '{}' ; ".format(member_email)
+		cursor.execute(sql)
+		all_email = cursor.fetchall()
+		
+		cursor.close()
+		connection.close()
+		if all_email == [] or all_email[0][3] != member_password :
+			error_message = "信箱、密碼輸入錯誤"
+			return jsonify({'error':True,"message":error_message}) ,400
+
+
+		session["id"] = all_email[0][0]
+		session["name"] = all_email[0][1]
+		session["email"] = all_email[0][2]
+
+	
+		return jsonify({"ok": all_email[0][3] == member_password})
+
+	if request.method == 'POST':
+		print('POST')
+		data = json.loads(request.data)
+		member_email = data['email']
+		member_password = data['password']
+		member_name = data['name']
+
+		try:
+			connection = link_mysql()
+			cursor = connection.cursor()
+		except:
+			return jsonify({"error":True ,"message": "伺服器內部錯誤"}) , 500
+
+		sql = " select email from level2member where email = '{}' ; ".format(member_email)
+		cursor.execute(sql)
+		all_email = cursor.fetchall()
+		if all_email == []:
+			sql = " insert into level2member (name ,email ,password) values ('{}' ,'{}' ,'{}');".format(member_name,member_email,member_password)
+			cursor.execute(sql)
+			connection.commit()
+			cursor.close()
+			connection.close()    
+			return jsonify({"ok":True})
+		
+		error_message = "帳號已經被註冊"
+		return jsonify({"error":True,"message":"註冊失敗，重複的Email"}) , 400
+	if request.method == 'DELETE':
+		session.clear()
+		return jsonify({"ok":True}),200
 
 @app.route("/booking")
 def booking():
