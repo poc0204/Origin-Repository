@@ -4,9 +4,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='booking.css') }}">
+    <script src="{{ url_for('static', filename='booking.js') }}" type="text/javascript" ></script> 
+    <title>booking</title>
 </head>
 <body>
-    
+    {% extends 'index.html' %}
+    {% block header %}
+    <div class="booking">
+        <div class="booking_size">
+            <div class="attraction_conten">
+                <h2>您好，</h2><h2 id = "member_name"></h2><h2>，待預訂的行程如下：</h2>
+                <div class="attraction_conten_layout" id="attraction_conten_layout">
+                    <div class="attraction_img" id="attraction_img">
+                        <img id = "attraction_show_img" class="attraction_show_img" src="">
+                    </div>
+                    <div class="attraction_information">
+                        <h4>台北一日遊:<h4 id="booking_name"></h4></h4></br>
+                        <h3>日期：<h3 id ="booking_date"></h3></h3></br>
+                        <h3>時間：<h3 id ="booking_time"></h3></h3></br>
+                        <h3>費用：<h3 id ="booking_price"></h3></h3></br>
+                        <h3>地點：<h3 id ="booking_address"></h3></h3></br>
+                    </div>
+                
+                    <div class="delete_img" id="delete_img" onclick ="delete_booking()">
+                        <img src="{{ url_for('static', filename='images/delete.png')}}">
+                    </div>
+                </div>
+
+            </div>
+            <hr id ="hr1">
+            <div class="member_data" id="member_data">
+                <h2>您的聯絡資訊</h2></br>
+                <h4>聯絡姓名：</h4><input type="text" id ="input_name" valus=""></br>
+                <h4>連絡信箱：</h4><input type="text" id ="input_email" valus=""></br>
+                <h4>手機號碼：</h4><input></br>
+                <h4 class="phone_text">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</h4>
+            </div>
+            <hr id ="hr2">
+            <div class="pay" id="pay">
+                <h2>信用卡付款資訊</h2>
+                <h4>卡片號碼：</h4><input type="text"></br>
+                <h4>過期時間：</h4><input type="date"></br>
+                <h4>驗證密碼：</h4><input type="text"></br>
+            </div>
+            <hr id ="hr3">
+            <div class="total" id ="total">
+            <h4>總價：</h4>
+            <button>確認訂購並付款</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <h3>COPYRIGHT © 2021 台北一日遊</h3>
+    </footer>
+    {% endblock %}
 </body>
 </html>

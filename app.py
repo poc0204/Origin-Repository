@@ -1,4 +1,5 @@
 from datetime import date
+from pickle import NONE
 from pprint import pprint
 from telnetlib import PRAGMA_HEARTBEAT
 from urllib import response
@@ -143,7 +144,6 @@ def api_attraction(id):
 @app.route("/api/user",methods = ['GET', 'POST', 'PATCH', 'DELETE'])
 def api_user():
 	if request.method == 'GET':
-		print('GET')
 		id = session.get('id')
 		name = session.get('name')
 		email = session.get('email')
@@ -211,6 +211,73 @@ def api_user():
 @app.route("/booking")
 def booking():
 	return render_template("booking.html")
+
+@app.route("/api/booking" , methods = ['GET', 'POST', 'DELETE'])
+def api_booking():
+	if request.method == 'GET':
+		id = session.get('id')
+		attraction_id = session.get('attraction_id')
+		attraction_name = session.get('attraction_name')
+		attractiona_address = session.get('attractiona_address')
+		attraction_image = session.get('attraction_image')
+		date = session.get('date')
+		time = session.get('time')
+		price = session.get('price')
+		name = session.get('name')
+		email = session.get('email')
+		if attraction_id == None:
+			return jsonify({"data":None}) , 200
+		if id == None:
+			return jsonify({"error": True,"message": "未登入系統，拒絕存取"}) , 403
+		else:
+			return jsonify({
+				"data": {
+				"attraction": {
+				"id": attraction_id,
+				"name": attraction_name,
+				"address": attractiona_address,
+				"image": attraction_image
+				},
+				"date": date,
+				"time": time,
+				"price": price,
+				"member":name,
+				"email":email
+				}}) , 200
+	if request.method == 'POST':
+		try:
+			connection = link_mysql()
+			cursor = connection.cursor()
+		except:
+			return jsonify({"error": True,"message": "伺服器內部錯誤"}) , 500
+		data = json.loads(request.data)
+		if data['attractionId'] == '' or data['date'] == '' or data['time'] == '' or data['price'] == '' :
+			return jsonify({"error": True,"message": "建立失敗，輸入不正確或其他原因"}) , 400
+	
+		name = session.get('name')
+		if name == None :
+			return jsonify({"error": True,"message": "未登入系統，拒絕存取"}) , 403
+		else:
+			session["attraction_id"] = data['attractionId']
+			session["attraction_name"] = data['name']
+			session["attractiona_address"] = data['address']
+			session["attraction_image"] = data['image']
+			session["date"] = data['date']
+			session["time"] = data['time']
+			session["price"] = data['price']
+			return jsonify({"ok": True}) , 200
+	if request.method == 'DELETE':
+		id = session.get('id')
+		if id == '':
+			return jsonify({"error":True,"message": "未登入系統，拒絕存取"}) , 403
+		session["attraction_id"] = ''
+		session["attraction_name"] = ''
+		session["attractiona_address"] = ''
+		session["attraction_image"] = ''
+		session["date"] =''
+		session["time"] = ''
+		session["price"] = ''
+		return jsonify({"ok":True}) , 200
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")

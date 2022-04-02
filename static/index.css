@@ -479,7 +479,7 @@ footer > h3 {
 @media only screen and (max-width:500px){
 
   nav {
-    width: 360px; 
+    width: 340px; 
   }
   nav > button{
     float: right;
