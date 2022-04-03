@@ -4,9 +4,9 @@ let id_number = location.href
 id_number = id_number.substring(33,100)
 
 let booking_attractions = []
+console.log()
 
-
-fetch(`http://3.87.217.170:3000/api/attractions/${id_number}`, {method: 'get'})
+fetch(`http://3.87.217.170:3000/api/attractions/${id_number}`, {method: 'GET'})
 .then(response =>{
   return  response.json()
 })

@@ -75,7 +75,22 @@ h2{
    
    
 }
+input{
+    width: 200px;
+    height: 38px;
+    left: 81px;
+    top: 0px;
+    background: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
 
+}
 .member_data > h4 {
     display: inline-block;
     font-family: 'Noto Sans TC';
@@ -199,5 +214,6 @@ margin-bottom: 50px ;
     .total{
         padding: 0px;
     }
+
   
 }

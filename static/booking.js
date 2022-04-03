@@ -20,12 +20,16 @@ document.addEventListener("DOMContentLoaded",function(){
      
           document.getElementById('member_name').innerHTML=member_data['data']['name'];
           document.getElementById('attraction_conten_layout').innerHTML="";
-          document.getElementById('member_data').innerHTML="";
+          document.getElementById('member_data').innerHTML="<h4>目前沒有任何待預訂的行程</h4>";
+          document.getElementById('member_data').style.margin='0px';
           document.getElementById('pay').innerHTML="";
+          document.getElementById('pay').style.margin='0px';
           document.getElementById('total').innerHTML="";
           document.getElementById('hr1').style.border="0px";
           document.getElementById('hr2').style.border="0px";
+          document.getElementById('hr2').style.margin="0px";
           document.getElementById('hr3').style.border="0px";
+          document.getElementById('hr3').style.margin="0px";
         }
         else{
 
