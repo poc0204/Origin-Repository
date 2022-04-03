@@ -1,6 +1,10 @@
 let id_number = location.href
 
+
 //console.log(id_number.substring(33,100))
+
+console.log(id_number.substring(36,100))
+
 id_number = id_number.substring(36,100)
 
 let booking_attractions = []
@@ -109,6 +113,7 @@ function start_booking_click(){
     if(data['data']['id'] == null){
       login_click();
     }
+
     else{
       let coose_date = document.getElementById("date").value
       

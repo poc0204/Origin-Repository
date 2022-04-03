@@ -129,7 +129,8 @@ function select_click(){
    
   }
   else{
-        fetch(`http://3.87.217.170:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
+        fetch(`http://3.87.217.170:3000/api/attractions?keyword=${keyword.value}`, {method: 'get'})
+
         .then(response =>{
           return  response.json()
       })
@@ -216,6 +217,7 @@ function no_data(){
   third_p.innerHTML ="查無景點，請重新輸入"
   div_delet.appendChild(third_p);
 }
+
 
 function login_click(){
   let dialog = document.getElementById("dialog")
@@ -382,6 +384,7 @@ function IsEmail(email) {
     return true;
   }
 }
+
 
 function booking_click(){
   let url = `http://3.87.217.170:3000/api/user`;
