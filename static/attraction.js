@@ -1,16 +1,22 @@
 let id_number = location.href
 
+
+//console.log(id_number.substring(33,100))
+
 console.log(id_number.substring(36,100))
+
 id_number = id_number.substring(36,100)
 
+let booking_attractions = []
+console.log()
 
-
-fetch(`http://3.87.217.170:3000/api/attractions/${id_number}`, {method: 'get'})
+fetch(`http://3.87.217.170:3000/api/attractions/${id_number}`, {method: 'GET'})
 .then(response =>{
   return  response.json()
 })
 
 .then( data =>{
+    booking_attractions = data ;
     let name = document.getElementById("name")
     name.innerHTML = data['data']['data']['name'] ; 
     let category = document.getElementById("category")
@@ -40,14 +46,29 @@ function morning(){
     let cost_h5 = document.getElementById("cost_h4");
     cost_h5.innerHTML = "新台幣2000"
 }
-function night(){
+function afternoon(){
     let cost_h5 = document.getElementById("cost_h4");
     cost_h5.innerHTML = "新台幣2500"
 }
 
 document.addEventListener("DOMContentLoaded",function(){
-    var dots = document.getElementsByClassName("dot");
+    let dots = document.getElementsByClassName("dot");
     dots[slideIndex - 1].className += " active";
+    let choose_date = document.getElementById('date');
+    new_date = new Date().toLocaleDateString();
+    let output =[]
+    if( new_date.length === 8){
+      output=new_date.replace(/\//g, "-0");
+    }
+    if( new_date.length === 9){
+        if(new_date.charAt(6) === '/'){
+          output=new_date.replace(/\//, "-0");
+        }
+        else{
+          output=new_date.replace(/\/{2}/, "-0");
+        }
+    }
+    choose_date.min=output;
 })
 var slideIndex = 1;
 
@@ -81,11 +102,68 @@ function showSlides(n) {
   dots[slideIndex - 1].className += " active";
 }
 
-window.onscroll=function(){
 
-    let nav = document.getElementById("nav");//獲取到導航欄id
-    nav.style.top = '0';
-    nav.style.zIndex = '9999';
-    nav.style.position = 'fixed';
+function start_booking_click(){
+  let url = `http://3.87.217.170:3000/api/user`;
+  fetch(url, {method:'GET'})
+  .then(response =>{
+    return  response.json()
+  })
+  .then( data =>{
+    if(data['data']['id'] == null){
+      login_click();
     }
+
+    else{
+      let coose_date = document.getElementById("date").value
+      
+      if(coose_date === ''){
+          alert("請選擇日期")
+          return
+      }
+      let radio_time = document.getElementsByTagName("INPUT");
+      let choose_radio_time = []
+      for (var i = 0; i < radio_time.length; i++) {
+          if (radio_time[i].type == "radio") {
+              if (radio_time[i].checked) {
+                  choose_radio_time = radio_time[i].value
+              }
+          }
+      }
+      
+      let pice = document.getElementById("cost_h4").textContent
+      let booking_id = booking_attractions['data']['data']['id'];
+      let booking_name = booking_attractions['data']['data']['name'];
+      let booking_address = booking_attractions['data']['data']['address'];
+      let booking_image = booking_attractions['data']['data']['images'][0];
+      let url =`http://3.87.217.170:3000/api/booking`;
+      let booking_data ={
+        "attractionId": booking_id,
+        "name":booking_name,
+        "address":booking_address,
+        "image":booking_image,
+        "date": coose_date ,
+        "time": choose_radio_time,
+        "price": pice.substring(3,100)
+      }
+      fetch(url, 
+      {
+        method: 'POST',
+        body:JSON.stringify(booking_data),  
+        headers:{
+        'Content-Type': 'application/json'
+      }
+      })
+      .then(response =>{
+        return  response.json()
+      })
+      .then( data =>{
+        if(data['ok'] === true){
+          document.location.href='http://3.87.217.170:3000/booking';
+        }
+     
+      })
+    }
+  })
   
+}

@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded",function(){
 
   window.addEventListener('scroll', function() {
       //文档内容实际高度（包括超出视窗的溢出部分）
+      if(window.location.href !== "http://3.87.217.170:3000/"){
+        return 
+      }
       let scrollHeight =  document.documentElement.scrollHeight || document.body.scrollHeight;
       //console.log('scrollHeight',scrollHeight)
       //滚动条滚动距离
@@ -28,9 +31,7 @@ document.addEventListener("DOMContentLoaded",function(){
       //console.log('clientHeight',clientHeight)
       if(clientHeight + scrollTop+1 >= scrollHeight){
         let data_length = Object.values(start_data['data']).length
-  
         if(data_length >= 13){
-          
           page = page+1;
               if(keyword.value !=''){ 
 
@@ -79,7 +80,7 @@ document.addEventListener("DOMContentLoaded",function(){
             }
         }
         else{
-
+          return ;
         }
       }
       
@@ -136,7 +137,7 @@ function select_click(){
       .then( select_click =>{
         start_data = select_click ;
         let keyword_length = Object.values(start_data['data']).length
-        console.log('keyword_length',keyword_length)
+        //console.log('keyword_length',keyword_length)
         let div_delet = document.getElementById("third");
         
         
@@ -146,7 +147,7 @@ function select_click(){
         else{
           div_delet.innerHTML ="";
           if(keyword_length >=13){
-            console.log(keyword_length)
+            //console.log(keyword_length)
             start_time = 0 ;
             end_time = 11
             show_img(start_time,end_time,start_data)
@@ -164,8 +165,12 @@ function select_click(){
 
 
 function show_img(start_time,end_time,data){
+
     let third = document.getElementById("third");
     let j = 0; //取單筆資料 根據回圈次數
+    if(third === null){
+      return ;
+    }
     for(var i = start_time ; i<=end_time;i++){
 
       let all_data_div = document.createElement("div");
@@ -378,4 +383,22 @@ function IsEmail(email) {
   }else{
     return true;
   }
+}
+
+
+function booking_click(){
+  let url = `http://3.87.217.170:3000/api/user`;
+  fetch(url, {method:'GET'})
+  .then(response =>{
+    return  response.json()
+  })
+  .then( data =>{
+    console.log(data['data']['id'])
+    if(data['data']['id'] == null){
+      login_click();
+    }
+    else{
+      window.location.href = "http://3.87.217.170:3000/booking";
+    }
+  })  
 }

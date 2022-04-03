@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+* reset */
+body, h1, ul { margin: 0px; }
+button { cursor: pointer;   }
+*{box-sizing: border-box;}
+body{
+  margin: 0px;
+  
+}
+hr{border: 1px solid #E8E8E8;}
+.booking{
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.booking_size{
+    width: 1200px;
+}
+.attraction_conten{
+    padding: 0px 96px 0px;
+}
+.attraction_conten > h2 {
+    display: inline-block;
+}
+.attraction_show_img{
+    width: 266px;
+    height: 200px;
+    margin-right: 35px;
+    margin-left: 8px;
+    margin-bottom: 40px;
+}
+.attraction_information{
+    width: 100%;
+}
+.attraction_information > h3{
+    display: inline-block;
+    margin: 10px 0px 10px 0px;
+
+
+}
+.attraction_conten_layout{
+    display: flex;
+}
+h2{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 16px;
+    color: #666666;
+    
+}
+
+.attraction_information > h3 , h4{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+
+   }
+.attraction_information > h4{
+    display:inline-block;
+    color: #448899;
+    margin: 10px 0px 10px 0px;
+}
+.delete_img{
+    width: auto;
+}
+.delete_img > img{
+    width: 30px;
+    height: 30px;    
+   
+   
+}
+input{
+    width: 200px;
+    height: 38px;
+    left: 81px;
+    top: 0px;
+    background: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+
+}
+.member_data > h4 {
+    display: inline-block;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+}
+
+.member_data >.phone_text{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+}
+.member_data , .pay{
+    padding: 0px 105px 0px;
+    margin-top: 40px;
+}
+
+.pay > h4{
+    display: inline-block;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+}
+.total{
+float: right;
+padding: 0px 105px 0px;
+margin-bottom: 50px ;
+}
+.total > button{
+    width: 154px;
+    height: 33px;
+    background:#448899;
+    border-radius: 5px;
+    font-family: 'Noto Sans TC';
+
+    font-size: 19px;
+    display: flex;
+    color: #FFFFFF;
+    justify-content: center;
+    border: #FFFFFF;
+    margin-top: 5px;
+    font-weight: 400;
+}
+@media only screen and (max-width:1200px){
+    .booking_size{
+        width: 1000px;
+    }
+}
+@media only screen and (max-width:1000px){
+    .booking_size{
+        width: 800px;
+    }
+    .member_data >.phone_text{
+        font-family: 'Noto Sans TC';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 23px;
+        color: #666666;
+        }
+}
+
+@media only screen and (max-width:800px){
+    .booking_size{
+        width: 340px;
+    }
+    .attraction_conten_layout{
+        display: block;
+    }
+    h2{
+        margin: 0px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    .attraction_show_img{
+        width: 340px;
+        margin: 0px;
+        padding: 20px 0px;
+        height: 256px;
+    }
+    .attraction_conten{
+        padding: 0px;
+
+    }
+    .delete_img{
+       width: 340px;
+       display: flex;
+       float: none;
+       justify-content: end;
+       margin-bottom: 20px;
+    }
+    .delete_img > img{
+        position:unset;
+        
+        
+    }
+    .member_data{
+        padding: 0px;
+    }
+    .pay{
+        padding: 0px;
+    }
+    .member_data >.phone_text{
+        font-family: 'Noto Sans TC';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 23px;
+        color: #666666;
+        }
+    .total{
+        padding: 0px;
+    }
+
+  
+}
