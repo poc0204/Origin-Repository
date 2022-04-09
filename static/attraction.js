@@ -1,10 +1,10 @@
 let id_number = location.href
 
-//console.log(id_number.substring(33,100))
-id_number = id_number.substring(36,100)
+//console.log(id_number.substring(33,100))//本機端
+id_number = id_number.substring(36,100)//ec2
 
 let booking_attractions = []
-console.log()
+
 
 fetch(`http://3.87.217.170:3000/api/attractions/${id_number}`, {method: 'GET'})
 .then(response =>{

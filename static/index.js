@@ -390,7 +390,7 @@ function booking_click(){
     return  response.json()
   })
   .then( data =>{
-    console.log(data['data']['id'])
+    
     if(data['data']['id'] == null){
       login_click();
     }

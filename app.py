@@ -7,6 +7,8 @@ from wsgiref.util import request_uri
 from flask import Flask ,redirect,url_for ,render_template , request , session  , make_response,jsonify
 import json , re
 import mysql.connector
+import requests
+import time
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
@@ -278,8 +280,131 @@ def api_booking():
 		session["time"] = ''
 		session["price"] = ''
 		return jsonify({"ok":True}) , 200
+
+
+@app.route("/api/orders",methods=['POST'])
+def api_orders():
+	try:
+		attraction_id = session.get('attraction_id')
+		member_email = session.get('email')
+	except:
+		return jsonify({ "error": True,"message": "未登入系統，拒絕存取"})
+	data = json.loads(request.data)
+	number = get_order_code()
+	if data['time'] == '下午 1 點到晚上 8 點':
+		data['time'] = 'afternoon'
+	else:
+		data['time'] = 'morning'
+	try:
+		connection = link_mysql()
+		cursor = connection.cursor()
+		sql = " insert into level2_booking (number ,price ,id ,name ,address ,image ,date ,time ,pay_name ,pay_email ,pay_phone ,pay_status ,pay_message,member_email) \
+			values ('{}' ,'{}' ,'{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}');\
+			".format(number,data['pice'],attraction_id,data['name'],data['address'],data['image'],data['date'],data['time'],data['input_name'],data['input_email'],data['input_phone'],'未付款','未付款',member_email)
+		cursor.execute(sql)
+		connection.commit()
+		cursor.close()
+		connection.close() 
+	except:
+			return jsonify({"error": True,"message": "伺服器內部錯誤"}) ,500
+
+	post_data = {
+        "prime": data['prime'],
+        "partner_key": "partner_UaDyaMflQx3KKu7LFENQ2X0Uvr3Bcq5Mpwx68YnmYSuNjUAlO4bQEUw6",
+        "merchant_id": "poc0204_TAISHIN",
+        "amount": data['pice'],
+        "currency": "TWD",
+        "details": "An apple and a pen.",
+        "cardholder": {
+            "phone_number": data['input_phone'],
+            "name": data['input_name'],
+            "email": data['input_email']
+        },
+        "remember": False
+    }
+	headers = {
+            'x-api-key': 'partner_UaDyaMflQx3KKu7LFENQ2X0Uvr3Bcq5Mpwx68YnmYSuNjUAlO4bQEUw6',
+			'Content-Type': 'application/json'
+        } 
+
+	pay_by_prime = requests.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime',data = json.dumps(post_data),headers=headers)
+
+	card_message = json.loads(pay_by_prime.text)
+	
+	if card_message['msg'] == 'Success':
+		try:
+			connection = link_mysql()
+			cursor = connection.cursor()
+			sql = "UPDATE level2_booking set pay_status = '{}' , pay_message = '{}' where number = {}".format(card_message['status'],card_message['msg'],number)
+			cursor.execute(sql)
+			connection.commit()
+			cursor.close()
+			connection.close()
+			return  jsonify({"number": number,
+							"payment":		{
+								"status": card_message['status'],
+								"message": card_message['msg']
+							}
+			}) , 200
+		except:
+			return jsonify({"error": True,"message": "伺服器內部錯誤"}) ,500
+
+	else:
+		connection = link_mysql()
+		cursor = connection.cursor()
+		sql = "UPDATE level2_booking set pay_status = '{}' , pay_message = '{}' where number = {}".format(card_message['status'],card_message['msg'],number)
+		cursor.execute(sql)
+		connection.commit()
+		cursor.close()
+		connection.close()
+		return jsonify({ "error": True,"message": "訂單建立失敗，輸入不正確或其他原因"}) , 400
+
+@app.route("/api/order/<orderNumber>",methods=['GET'])
+def api_order(orderNumber):
+	print(orderNumber)
+	try:
+		member_email = session.get('email')
+	except:
+		return jsonify({ "error": True,"message": "未登入系統，拒絕存取"})
+
+	connection = link_mysql()
+	cursor = connection.cursor()
+
+	sql = " select * from level2_booking where number = '{}' ; ".format(orderNumber)
+	cursor.execute(sql)
+	order_data = cursor.fetchall()
+	if order_data == []:
+		return jsonify({"data":None}) ,200
+	
+	data = {
+		"number": order_data[0][0],
+		"price":  order_data[0][1],
+		"trip": {
+			"attraction": {	
+				"id": order_data[0][2],
+				"name": order_data[0][3],
+				"address":order_data[0][4],
+				"image": order_data[0][5]
+			},
+		"date":  order_data[0][6],
+		"time":  order_data[0][7]
+		},
+		
+		"contact": {
+			"name": order_data[0][8],
+			"email": order_data[0][9],
+			"phone": order_data[0][10]
+		},
+		"status":  order_data[0][11]
+	}
+	
+	return jsonify({"data":data}) ,200
+	
+
 @app.route("/thankyou")
 def thankyou():
+	order_number = request.args.get('number')
+	print(order_number)	
 	return render_template("thankyou.html")
 
 def link_mysql():
@@ -303,7 +428,9 @@ def link_mysql():
 	else:
 		return connection
  
-		
+def get_order_code():
+	order_on = str(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time())) + str(time.time()).replace('.','')[-7:])
+	return order_on		
 
 	
    

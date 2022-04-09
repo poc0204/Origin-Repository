@@ -1,4 +1,6 @@
+
 document.addEventListener("DOMContentLoaded",function(){
+    
     let url = `http://3.87.217.170:3000/api/user`;
     fetch(url, {method:'GET'})
     .then(response =>{
@@ -48,8 +50,8 @@ document.addEventListener("DOMContentLoaded",function(){
           booking_price.innerHTML= data['data']['price'];
           let booking_address = document.getElementById('booking_address');
           booking_address.innerHTML= data['data']['attraction']['address'];
-
-    
+          let sum_booking_price = document.getElementById('sum_booking_price');
+          sum_booking_price.innerHTML = "新台幣"+data['data']['price']+"元";
         }
         })
       }
