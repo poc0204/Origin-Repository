@@ -2,11 +2,55 @@
 * reset */
 body, h1, ul { margin: 0px; }
 button { cursor: pointer;   }
+body::-webkit-scrollbar {
+  display: none;
+}
 *{box-sizing: border-box;}
-body{
-  margin: 0px;
+.spinner_size{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: white;
+  display: flex;
+  align-items: center ;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+}
+.spinner{
+  display:flex;
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+.spinner_size > h1{
+  color: rgba(68, 136, 153, 1);
+}
+.spinner div {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border:  8px solid transparent;
+  border-top-color:rgba(68, 136, 153, 1);
+  border-radius: 50%;
+  animation: spinnerOne 1.2s linear infinite;
   
 }
+
+.spinner div:nth-child(2) {
+  border:  8px solid transparent;
+  border-bottom-color: rgba(68, 136, 153, 1);
+}
+
+@keyframes spinnerOne {
+  0% {transform:  rotate(0deg); border-width: 10px;}
+  50% {transform:  rotate(180deg); border-width: 1px;}
+  100% {transform:  rotate(360deg); border-width: 10px;}
+}
+
+
+
 header{
     display:flex;
     width: 100%;
@@ -50,7 +94,7 @@ nav > .loginout{
   justify-content: center;
   background-color: #757575;
   opacity :0.5;
- z-index: 99;
+  z-index: 99;
 }
 .login_dialog_size{
   width: 340px;
@@ -59,7 +103,9 @@ nav > .loginout{
   top: 80px;
   position:fixed;
   z-index: 100;
-}
+  opacity: 0;
+ }
+
 .close{
   right: 0px;
 }
@@ -68,7 +114,6 @@ nav > .loginout{
   text-align: center;
   justify-content: center;
   align-items: center;
- display: none;
 }
 .login_dialog > h1{
   font-family: 'Noto Sans TC';
@@ -177,6 +222,14 @@ nav > .loginout{
 .new_member_dialog > .close > img{
   width: 16px;
   height: 16px;
+}
+#new_member_error_massage , #error_massage{
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #666666;
 }
 .second{
   background:linear-gradient(135deg, #AADDEE 0%, #66AABB 100%);

@@ -239,8 +239,8 @@ input[type='date']{
 }
 .third_size_attraction{
   width: 1200px;
-  height: 500px;
-
+  height: auto;
+  margin-bottom: 50px;
 }
 .third_size_attraction > h3 {
   font-family: 'Noto Sans TC';
@@ -263,20 +263,7 @@ input[type='date']{
   font-weight:bold;
   margin-bottom: 0px;
 }
-footer{
-    width: 100%;
-    background-color: #757575;
-    height: 104px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  footer > h3 {
-    font-family: 'Noto Sans TC';
-    font-style: normal;
-    font-size: 16px;
-    color: #FFFFFF;
-  }
+
 
   @media only screen and (max-width:1250px){
     nav {

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='thankyou.js') }}" type="text/javascript" ></script> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='thankyou.css') }}">
+    <title>Thankyou</title>
+</head>
+<body>
+    {% extends 'index.html' %}
+    {% block header %}
+    <div class="out_size">
+        <div class="in_size" id="in_size">
+            <h2>感謝訂購:</h2></br>
+            <h3>訂單編號:</h3><h3 id="number"></h3>
+        </div>
+    </div>
+
+    {% endblock %}
+</body>
+</html>

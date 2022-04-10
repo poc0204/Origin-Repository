@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+
+.in_size > h2{
+    display: inline-block;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 16px;
+    color: #666666;
+    margin: 25px 0px;
+}
+.in_size > h3{
+    display: inline-block;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 13px;
+    color: #666666;
+    margin: 25px 0px;
+    margin-bottom: 50px;
+}
+.out_size{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.in_size{
+    width: 1200px;
+    padding: 0px 96px 0px;
+}
+
+@media only screen and (max-width:450px){
+.in_size {
+    padding: 0px 52px 0px;
+}
+}
