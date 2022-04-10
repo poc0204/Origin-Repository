@@ -340,6 +340,13 @@ def api_orders():
 			connection.commit()
 			cursor.close()
 			connection.close()
+			session["attraction_id"] = ''
+			session["attraction_name"] = ''
+			session["attractiona_address"] = ''
+			session["attraction_image"] = ''
+			session["date"] =''
+			session["time"] = ''
+			session["price"] = ''
 			return  jsonify({"number": number,
 							"payment":		{
 								"status": card_message['status'],

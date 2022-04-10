@@ -1,12 +1,12 @@
 let id_number = location.href
 
-//console.log(id_number.substring(33,100))//本機端
+//id_number.substring(33,100)//本機端
 id_number = id_number.substring(36,100)//ec2
 
 let booking_attractions = []
 
 
-fetch(`http://3.87.217.170:3000/api/attractions/${id_number}`, {method: 'GET'})
+fetch(`http://3..87.217.170:3000/api/attractions/${id_number}`, {method: 'GET'})
 .then(response =>{
   return  response.json()
 })
@@ -100,7 +100,7 @@ function showSlides(n) {
 
 
 function start_booking_click(){
-  let url = `http://3.87.217.170:3000/api/user`;
+  let url = `http://3..87.217.170:3000/api/user`;
   fetch(url, {method:'GET'})
   .then(response =>{
     return  response.json()
@@ -131,7 +131,7 @@ function start_booking_click(){
       let booking_name = booking_attractions['data']['data']['name'];
       let booking_address = booking_attractions['data']['data']['address'];
       let booking_image = booking_attractions['data']['data']['images'][0];
-      let url =`http://3.87.217.170:3000/api/booking`;
+      let url =`http://3..87.217.170:3000/api/booking`;
       let booking_data ={
         "attractionId": booking_id,
         "name":booking_name,
@@ -154,7 +154,7 @@ function start_booking_click(){
       })
       .then( data =>{
         if(data['ok'] === true){
-          document.location.href='http://3.87.217.170:3000/booking';
+          document.location.href='http://3..87.217.170:3000/booking';
         }
      
       })
