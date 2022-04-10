@@ -2,40 +2,69 @@ let start_data = [] ;
 let page = [] ;
 let start_time  = [] ;
 let end_time = [] ;
-document.addEventListener("DOMContentLoaded",function(){
-  page = 0 ;
-  fetch(`http://3.87.217.170:3000/api/attractions?page=${page}`, {method: 'get'})
-  .then(response =>{
-    return  response.json()
-  })
+let ip_addres = `http://127.0.0.1:3000/`;
+  document.addEventListener("DOMContentLoaded",function(){
+    page = 0 ;
+    fetch(ip_addres+`api/attractions?page=${page}`, {method: 'get'})
+    .then(response =>{
+      return  response.json()
+    })
+  
+   .then( data =>{
+    start_time = 0 ;
+    end_time = 11 ;
+    start_data = data ;
+    show_img(start_time,end_time,data)
+    
+    setTimeout(function(){
+      let spinner_size = document.getElementById("spinner_size")
+      spinner_size.style.display = 'none' ;
+      document.body.style.display = 'contents' ;
+      
+    },1000);
 
- .then( data =>{
-  start_time = 0 ;
-  end_time = 11 ;
-  start_data = data ;
-  show_img(start_time,end_time,data)
-
-
-  window.addEventListener('scroll', function() {
-      //文档内容实际高度（包括超出视窗的溢出部分）
-      if(window.location.href !== "http://3.87.217.170:3000/"){
-        return 
-      }
-      let scrollHeight =  document.documentElement.scrollHeight || document.body.scrollHeight;
-      //console.log('scrollHeight',scrollHeight)
-      //滚动条滚动距离
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      //console.log('scrollTop',scrollTop)
-      //窗口可视范围高度
-      let clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-      //console.log('clientHeight',clientHeight)
-      if(clientHeight + scrollTop+1 >= scrollHeight){
-        let data_length = Object.values(start_data['data']).length
-        if(data_length >= 13){
-          page = page+1;
-              if(keyword.value !=''){ 
-
-                fetch(`http://3.87.217.170:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
+    window.addEventListener('scroll', function() {
+        //文档内容实际高度（包括超出视窗的溢出部分）
+        if(window.location.href !== ip_addres){
+          return 
+        }
+        let scrollHeight =  document.documentElement.scrollHeight || document.body.scrollHeight;
+        //console.log('scrollHeight',scrollHeight)
+        //滚动条滚动距离
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        //console.log('scrollTop',scrollTop)
+        //窗口可视范围高度
+        let clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        //console.log('clientHeight',clientHeight)
+        if(clientHeight + scrollTop+1 >= scrollHeight){
+          let data_length = Object.values(start_data['data']).length
+          if(data_length >= 13){
+            page = page+1;
+                if(keyword.value !=''){ 
+  
+                  fetch(ip_addres+`api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
+                  .then(response =>{
+                    return  response.json()
+                  })
+                  .then( next_data =>{
+                    
+                    start_time = start_time + 12 ;
+                    let next_data_length = Object.values(next_data['data']).length
+                    start_data = next_data
+                    if(next_data_length >= 13){
+                      end_time  = end_time + 12;
+                    }
+                    else{
+                      end_time = end_time+next_data_length
+                    
+                    }
+                    show_img(start_time,end_time,next_data)
+                    
+                  })
+           
+                }
+                else{
+                fetch(ip_addres+`api/attractions?page=${page}`, {method: 'get'})
                 .then(response =>{
                   return  response.json()
                 })
@@ -56,62 +85,39 @@ document.addEventListener("DOMContentLoaded",function(){
                 })
          
               }
-              else{
-              fetch(`http://3.87.217.170:3000/api/attractions?page=${page}`, {method: 'get'})
-              .then(response =>{
-                return  response.json()
-              })
-              .then( next_data =>{
-                
-                start_time = start_time + 12 ;
-                let next_data_length = Object.values(next_data['data']).length
-                start_data = next_data
-                if(next_data_length >= 13){
-                  end_time  = end_time + 12;
-                }
-                else{
-                  end_time = end_time+next_data_length
-                
-                }
-                show_img(start_time,end_time,next_data)
-                
-              })
-       
-            }
+          }
+          else{
+            return ;
+          }
         }
-        else{
-          return ;
-        }
-      }
-      
-    })
+        
       })
-  fetch('http://3.87.217.170:3000/api/user', {method: 'get'})
-  .then(response =>{
-    return  response.json()
+        })
+    fetch(ip_addres+`api/user`, {method: 'get'})
+    .then(response =>{
+      return  response.json()
+    })
+    .then( data =>{
+      if(data['data']['email'] === null){
+        let login = document.getElementById("login")
+        let loginout = document.getElementById("loginout")
+        login.style.display = "block";
+        loginout.style.display = "none";
+      }
+      else{
+        let dialog = document.getElementById("dialog")
+        let login_dialog = document.getElementById("login_dialog")
+        dialog.style.display="none";
+        login_dialog.style.display="none";
+        let login = document.getElementById("login")
+        let loginout = document.getElementById("loginout")
+        login.style.display = "none";
+        loginout.style.display = "block";
+        document.body.style.overflow = 'scroll' ;
+  
+      }
+    })
   })
-  .then( data =>{
-    if(data['data']['email'] === null){
-      let login = document.getElementById("login")
-      let loginout = document.getElementById("loginout")
-      login.style.display = "block";
-      loginout.style.display = "none";
-    }
-    else{
-      let dialog = document.getElementById("dialog")
-      let login_dialog = document.getElementById("login_dialog")
-      dialog.style.display="none";
-      login_dialog.style.display="none";
-      let login = document.getElementById("login")
-      let loginout = document.getElementById("loginout")
-      login.style.display = "none";
-      loginout.style.display = "block";
-      document.body.style.overflow = 'scroll' ;
-
-    }
-  })
-})
-
 window.onscroll=function(){
 
   let nav = document.getElementById("nav");//獲取到導航欄id
@@ -129,7 +135,7 @@ function select_click(){
    
   }
   else{
-        fetch(`http://3.87.217.170:3000/api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
+        fetch(ip_addres+`api/attractions?page=${page}&keyword=${keyword.value}`, {method: 'get'})
         .then(response =>{
           return  response.json()
       })
@@ -178,7 +184,7 @@ function show_img(start_time,end_time,data){
       third.appendChild(all_data_div);
 
       let a_herf = document.createElement("a");
-      a_herf.href="http://3.87.217.170:3000/attraction/"+data['data'][j]['id'];
+      a_herf.href= ip_addres+`attraction/`+data['data'][j]['id'];
       a_herf.id = "a_herf"+[i];
             
       let show_data = document.getElementById("show_data"+[i])
@@ -220,20 +226,56 @@ function no_data(){
 function login_click(){
   let dialog = document.getElementById("dialog")
   dialog.style.display="flex";
-  let login_dialog = document.getElementById("login_dialog")
-  login_dialog.style.display="block";
-  document.body.style.overflow = 'hidden' ;
+  document.body.style.display ="block";
+  document.body.style.overflow="hidden";
+  document.body.style.margin="0px"
+  let login_dialog_size = document.getElementById("login_dialog_size")
+
+  fadeIn(login_dialog_size,50);
+  login_dialog_size.style.height ="auto"
+ 
 
 }
 function close_login_dialog(){
-  let dialog = document.getElementById("dialog")
-  dialog.style.display="none";
-  let login_dialog = document.getElementById("login_dialog")
-  login_dialog.style.display="none";
-  let new_member_dialog = document.getElementById("new_member_dialog")
-  new_member_dialog.style.display="none";
-  document.body.style.overflow = 'scroll' ;
+  let login_dialog_size = document.getElementById("login_dialog_size")
+  fadeOut(login_dialog_size,50);
+  setTimeout(function(){
+    let dialog = document.getElementById("dialog")
+    dialog.style.display="none";
+    document.body.style.display ="contents";
+    document.body.style.overflow = 'scroll' ;
+  },700);
+  
 }
+//淡入淡出
+
+function fadeIn(element,speed){
+  if(element.style.opacity !=1){
+      var speed = speed || 50 ;
+      var num = 0;
+      var st = setInterval(function(){
+      num++;
+      element.style.opacity = num/10;
+      if(num>=10)  {  clearInterval(st);  }
+      },speed);
+  }
+}
+
+function fadeOut(element,speed){
+  if(element.style.opacity !=0){
+      var speed = speed || 50 ;
+      var num = 10;
+      var st = setInterval(function(){
+      num--;
+      element.style.opacity = num / 10 ;
+      if(num<=0)  {   clearInterval(st);  }
+      },speed);
+  }
+
+}
+
+
+
 function new_member_click(){
   let login_dialog = document.getElementById("login_dialog")
   login_dialog.style.display="none";
@@ -269,7 +311,7 @@ function login_member_click(){
         'email':email.value,
         'password':password.value,
       }
-      let url = `http://3.87.217.170:3000/api/user`;
+      let url = ip_addres+`api/user`;
       fetch(url, 
       {
         method: 'PATCH',
@@ -337,7 +379,7 @@ function create_new_member_click(){
         'email':new_member_email.value,
         'password':new_member_password.value,
       }
-      let url =`http://3.87.217.170:3000/api/user`;
+      let url =ip_addres+`api/user`;
       fetch(url, 
       {
         method: 'POST',
@@ -367,9 +409,11 @@ function create_new_member_click(){
 function loginout_click(){
   let login = document.getElementById("login")
   let loginout = document.getElementById("loginout")
+  let login_dialog = document.getElementById("login_dialog")
+  login_dialog.style.display ="block"
   login.style.display = "block";
   loginout.style.display = "none";
-  let url = `http://3.87.217.170:3000/api/user`;
+  let url = ip_addres+`api/user`;
   fetch(url, {method:'DELETE'})
 
 }
@@ -384,7 +428,7 @@ function IsEmail(email) {
 }
 
 function booking_click(){
-  let url = `http://3.87.217.170:3000/api/user`;
+  let url = ip_addres+`api/user`;
   fetch(url, {method:'GET'})
   .then(response =>{
     return  response.json()
@@ -395,7 +439,7 @@ function booking_click(){
       login_click();
     }
     else{
-      window.location.href = "http://3.87.217.170:3000/booking";
+      window.location.href =ip_addres+"booking";
     }
   })  
 }

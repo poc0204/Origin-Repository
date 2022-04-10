@@ -59,7 +59,7 @@
  
     <script src="https://js.tappaysdk.com/tpdirect/v5.8.0"></script>
     <script>
-
+           
             TPDirect.setupSDK(124035,'app_KFstpVK9lfJucXiKcUMDZiDH65x65x0Uj95gEwRxywXTg6xzFGSfp253l6tV', 'sandbox')
             let fields = {
                 number: {
@@ -161,10 +161,10 @@
                     .then( data =>{
                         if (data['error'] === true){
                             alert('付款失敗')
-                            document.location.href=`http://3.87.217.170:3000`;
+                            document.location.href=ip_addres;
                         }
                         else{
-                            document.location.href=`http://3.87.217.170:3000/thankyou?number=${data['number']}`;
+                            document.location.href=ip_addres+`thankyou?number=${data['number']}`;
                         }
 
                     })

@@ -153,7 +153,7 @@ def api_user():
 		return jsonify({"data":{"id":id,"name":name,"email":email}}),200
 
 	if request.method == 'PATCH':
-		print('PATCH')
+
 		data = json.loads(request.data)
 		member_email = data['email']
 		member_password = data['password']
@@ -181,7 +181,7 @@ def api_user():
 		return jsonify({"ok": all_email[0][3] == member_password})
 
 	if request.method == 'POST':
-		print('POST')
+	
 		data = json.loads(request.data)
 		member_email = data['email']
 		member_password = data['password']
@@ -368,7 +368,7 @@ def api_orders():
 
 @app.route("/api/order/<orderNumber>",methods=['GET'])
 def api_order(orderNumber):
-	print(orderNumber)
+
 	try:
 		member_email = session.get('email')
 	except:
@@ -411,7 +411,7 @@ def api_order(orderNumber):
 @app.route("/thankyou")
 def thankyou():
 	order_number = request.args.get('number')
-	print(order_number)	
+
 	return render_template("thankyou.html")
 
 def link_mysql():

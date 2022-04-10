@@ -1,12 +1,12 @@
 let id_number = location.href
 
-//id_number.substring(33,100)//本機端
-id_number = id_number.substring(36,100)//ec2
+//id_number = id_number.substring(33,100)
+id_number = id_number.substring(36,100)
 
 let booking_attractions = []
+let ip_address = `http://3.87.217.170:3000/`
 
-
-fetch(`http://3.87.217.170:3000/api/attractions/${id_number}`, {method: 'GET'})
+fetch(ip_address+`api/attractions/${id_number}`, {method: 'GET'})
 .then(response =>{
   return  response.json()
 })
@@ -53,18 +53,26 @@ document.addEventListener("DOMContentLoaded",function(){
     let choose_date = document.getElementById('date');
     new_date = new Date().toLocaleDateString();
     let output =[]
-    if( new_date.length === 8){
-      output=new_date.replace(/\//g, "-0");
+    output=new_date.replace(/\//g, "-");
+
+    if(output.length === 8){
+      output=new_date.replace(/\-/g, "-0");
+      choose_date.min=output;
     }
-    if( new_date.length === 9){
-        if(new_date.charAt(6) === '/'){
-          output=new_date.replace(/\//, "-0");
-        }
-        else{
-          output=new_date.replace(/\/{2}/, "-0");
-        }
+    if(output.length === 9){
+      if(output.charAt(6) === '-'){
+        output=output.replace(/\-/, "-0");
+        choose_date.min=output;
+      }
+      else{
+        output=output.replace(/\-{2}/, "-0");
+        choose_date.min=output;
+      }
     }
-    choose_date.min=output;
+    if(output.length === 10){
+      choose_date.min=output;
+    }
+   
 })
 var slideIndex = 1;
 
@@ -100,7 +108,7 @@ function showSlides(n) {
 
 
 function start_booking_click(){
-  let url = `http://3.87.217.170:3000/api/user`;
+  let url = ip_address+`api/user`;
   fetch(url, {method:'GET'})
   .then(response =>{
     return  response.json()
@@ -109,6 +117,7 @@ function start_booking_click(){
     if(data['data']['id'] == null){
       login_click();
     }
+
     else{
       let coose_date = document.getElementById("date").value
       
@@ -131,7 +140,7 @@ function start_booking_click(){
       let booking_name = booking_attractions['data']['data']['name'];
       let booking_address = booking_attractions['data']['data']['address'];
       let booking_image = booking_attractions['data']['data']['images'][0];
-      let url =`http://3.87.217.170:3000/api/booking`;
+      let url =ip_address+`api/booking`;
       let booking_data ={
         "attractionId": booking_id,
         "name":booking_name,
@@ -154,7 +163,7 @@ function start_booking_click(){
       })
       .then( data =>{
         if(data['ok'] === true){
-          document.location.href='http://3.87.217.170:3000/booking';
+          document.location.href=ip_address+`booking`;
         }
      
       })
