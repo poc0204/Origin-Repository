@@ -1,6 +1,14 @@
 let id_number = location.href
 
+
 //id_number = id_number.substring(33,100)
+
+
+//console.log(id_number.substring(33,100))
+
+console.log(id_number.substring(36,100))
+
+
 id_number = id_number.substring(36,100)
 
 let booking_attractions = []
