@@ -1,17 +1,17 @@
 
 document.addEventListener("DOMContentLoaded",function(){
     
-    let url = `http://3..87.217.170:3000/api/user`;
+    let url = `http://3.87.217.170:3000/api/user`;
     fetch(url, {method:'GET'})
     .then(response =>{
       return  response.json()
     })
     .then( member_data =>{
       if(member_data['data']['id'] == null){
-        document.location.href='http://3..87.217.170:3000/';
+        document.location.href='http://3.87.217.170:3000/';
       }
       else{
-        let url = `http://3..87.217.170:3000/api/booking`;
+        let url = `http://3.87.217.170:3000/api/booking`;
         fetch(url, {method:'GET'})
         .then(response =>{
           return  response.json()
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
 function delete_booking(){
-  let url = `http://3..87.217.170:3000/api/booking`;
+  let url = `http://3.87.217.170:3000/api/booking`;
   fetch(url, {method:'DELETE'})
   .then(response =>{
     return  response.json()
@@ -69,7 +69,7 @@ function delete_booking(){
   .then(data =>{
 
     if(data['ok'] === true){
-      document.location.href='http://3..87.217.170:3000/booking';
+      document.location.href='http://3.87.217.170:3000/booking';
     }
   })
 }
