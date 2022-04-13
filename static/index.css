@@ -5,6 +5,7 @@ button { cursor: pointer;   }
 body::-webkit-scrollbar {
   display: none;
 }
+
 *{box-sizing: border-box;}
 .spinner_size{
   width: 100%;
@@ -16,6 +17,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   flex-direction: column;
   z-index: 9999;
+  opacity: 1;
 }
 .spinner{
   display:flex;
@@ -51,12 +53,13 @@ body::-webkit-scrollbar {
 
 
 
-header{
+.header{
     display:flex;
     width: 100%;
     justify-content: center;
-    height: 62px;
- 
+    height: 62px; 
+    border-bottom: 1px solid #E8E8E8;
+    background: white;
 }
 /* NavBar */
 nav {
