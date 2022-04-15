@@ -35,13 +35,16 @@ def attraction(id):
 
 @app.route("/api/attractions",methods=['GET'])
 def api_attractions():
-	page = request.args.get('page')	
+	page = request.args.get('page')
 	if page == None:
 		page = 0
 	keyword = request.args.get('keyword')
-	connection = link_mysql() 	
-	cursor = connection.cursor()
-	sql = "select  COUNT(id) from level2; "
+	try:
+		connection = link_mysql()
+		cursor = connection.cursor()
+	except:
+		print('error')	
+	sql = "select COUNT(id) from level2; "
 	cursor.execute(sql)
 	id_count = cursor.fetchall()
 	page_start = int(page)
@@ -65,7 +68,7 @@ def api_attractions():
 		cursor.execute(sql)
 		id_data = cursor.fetchall()
 		
-		if id_data !=[]:
+		if id_data != ():
 			for i in range(len(id_data)):
 				data_images =[]
 				sql = "select images from level2_images where id_images = '{}'".format(id_data[i][0])
@@ -320,8 +323,8 @@ def api_orders():
 
 	post_data = {
         "prime": data['prime'],
-        "partner_key": "partner_UaDyaMflQx3KKu7LFENQ2X0Uvr3Bcq5Mpwx68YnmYSuNjUAlO4bQEUw6",
-        "merchant_id": "poc0204_TAISHIN",
+        "partner_key": os.getenv('partner_key'),
+        "merchant_id":  os.getenv('merchant_id'),
         "amount": data['pice'],
         "currency": "TWD",
         "details": "An apple and a pen.",
@@ -333,7 +336,7 @@ def api_orders():
         "remember": False
     }
 	headers = {
-            'x-api-key': 'partner_UaDyaMflQx3KKu7LFENQ2X0Uvr3Bcq5Mpwx68YnmYSuNjUAlO4bQEUw6',
+            'x-api-key': os.getenv('x_api_key'),
 			'Content-Type': 'application/json'
         } 
 
@@ -423,6 +426,14 @@ def thankyou():
 	order_number = request.args.get('number')
 
 	return render_template("thankyou.html")
+
+@app.route("/tappay")
+def tappay():
+	member_email = session.get('email')
+	if member_email == None:
+		return render_template("indext.html")
+	else:
+		return jsonify({'ap_id':os.getenv('ap_id'),'ap_key':os.getenv('ap_key'),}) ,200
 
 def link_mysql():
 	try:
