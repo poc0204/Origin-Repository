@@ -2,7 +2,7 @@ let start_data = [] ;
 let page = [] ;
 let start_time  = [] ;
 let end_time = [] ;
-let ip_addres = `http://3.87.217.170/:3000/`;
+let ip_addres = `http://3.87.217.170:3000/`;
   document.addEventListener("DOMContentLoaded",function(){
     page = 0 ;
     fetch(ip_addres+`api/attractions?page=${page}`, {method: 'get'})
@@ -232,8 +232,9 @@ function login_click(){
   document.body.style.display ="block";
   document.body.style.overflow="hidden";
   document.body.style.margin="0px"
+  
   let login_dialog_size = document.getElementById("login_dialog_size")
-
+  login_dialog_size.style.display="block"
   fadeIn(login_dialog_size,50);
   login_dialog_size.style.height ="auto"
  
@@ -242,6 +243,7 @@ function login_click(){
 function close_login_dialog(){
   let login_dialog_size = document.getElementById("login_dialog_size")
   fadeOut(login_dialog_size,50);
+  login_dialog_size.style.display="none";
   setTimeout(function(){
     let dialog = document.getElementById("dialog")
     dialog.style.display="none";
@@ -414,7 +416,7 @@ function loginout_click(){
   loginout.style.display = "none";
   let url = ip_addres+`api/user`;
   fetch(url, {method:'DELETE'})
-
+  document.location.href=ip_addres;
 }
 
 function IsEmail(email) {
