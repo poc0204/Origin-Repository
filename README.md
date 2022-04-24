@@ -27,13 +27,12 @@
 * AJAX 串接後端API
 ### 後端:
 * Python Flask
-* MySql
+* MySql 連線池
 * env 敏感資訊
 * API 開發
 * session 紀錄登入狀態
-## 第三方金流服務
+## 第三方服務
 * Tappay
-## 部署
 * AWS EC2
 ## 未來改善項目
 * session 換成 JWT 
