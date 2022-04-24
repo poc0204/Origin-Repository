@@ -3,7 +3,7 @@
 ## 台北一日遊 電商旅遊網(http://3.87.217.170:3000/) 
 ### 首頁
 ![首頁](https://user-images.githubusercontent.com/93992949/164957949-c9f587b0-f607-4f87-b530-4d10dc351369.png)
-### 會員登入 or 會員註冊
+### 會員登入 & 會員註冊
 ![會員登入](https://user-images.githubusercontent.com/93992949/164957991-78c6d025-f0d9-471a-80bd-ff2571c85fab.png)
 ![會員註冊](https://user-images.githubusercontent.com/93992949/164957995-f42ecd75-1b09-4c73-9e9b-3063ad7cde34.png)
 ### 滑動載入圖片
