@@ -14,6 +14,9 @@
 ![結帳](https://user-images.githubusercontent.com/93992949/164958023-f19dacb4-d0c3-466f-ba3b-9f6d1069e2d2.png)
 ### 結帳成功 預訂欄位清空
 ![結帳成功](https://user-images.githubusercontent.com/93992949/164958033-5512c5c4-7f9f-4c33-9262-d172978d6d47.png)
+### 結帳失敗 
+![結帳失敗](https://user-images.githubusercontent.com/93992949/164958131-6dab7b49-a089-45e0-a14c-aab0d7353dcf.png)
+
 
 ## 使用技術
 ### 前端:
