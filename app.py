@@ -9,6 +9,16 @@ import json , re
 import mysql.connector
 import requests
 import time
+
+import pymysql
+import threading
+from dbutils.pooled_db import PooledDB, SharedDBConnection
+from dotenv import load_dotenv, find_dotenv
+from pathlib import Path
+import os
+
+
+
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
@@ -25,13 +35,16 @@ def attraction(id):
 
 @app.route("/api/attractions",methods=['GET'])
 def api_attractions():
-	page = request.args.get('page')	
+	page = request.args.get('page')
 	if page == None:
 		page = 0
 	keyword = request.args.get('keyword')
-	connection = link_mysql() 	
-	cursor = connection.cursor()
-	sql = "select  COUNT(id) from level2; "
+	try:
+		connection = link_mysql()
+		cursor = connection.cursor()
+	except:
+		print('error')	
+	sql = "select COUNT(id) from level2; "
 	cursor.execute(sql)
 	id_count = cursor.fetchall()
 	page_start = int(page)
@@ -55,7 +68,7 @@ def api_attractions():
 		cursor.execute(sql)
 		id_data = cursor.fetchall()
 		
-		if id_data !=[]:
+		if id_data != ():
 			for i in range(len(id_data)):
 				data_images =[]
 				sql = "select images from level2_images where id_images = '{}'".format(id_data[i][0])
@@ -310,8 +323,8 @@ def api_orders():
 
 	post_data = {
         "prime": data['prime'],
-        "partner_key": "partner_UaDyaMflQx3KKu7LFENQ2X0Uvr3Bcq5Mpwx68YnmYSuNjUAlO4bQEUw6",
-        "merchant_id": "poc0204_TAISHIN",
+        "partner_key": os.getenv('partner_key'),
+        "merchant_id":  os.getenv('merchant_id'),
         "amount": data['pice'],
         "currency": "TWD",
         "details": "An apple and a pen.",
@@ -323,7 +336,7 @@ def api_orders():
         "remember": False
     }
 	headers = {
-            'x-api-key': 'partner_UaDyaMflQx3KKu7LFENQ2X0Uvr3Bcq5Mpwx68YnmYSuNjUAlO4bQEUw6',
+            'x-api-key': os.getenv('x_api_key'),
 			'Content-Type': 'application/json'
         } 
 
@@ -414,15 +427,35 @@ def thankyou():
 
 	return render_template("thankyou.html")
 
+@app.route("/tappay")
+def tappay():
+	member_email = session.get('email')
+	if member_email == None:
+		return render_template("indext.html")
+	else:
+		return jsonify({'ap_id':os.getenv('ap_id'),'ap_key':os.getenv('ap_key'),}) ,200
+
 def link_mysql():
 	try:
-		connection = mysql.connector.connect(
-			host = 'localhost',
-			database = 'website',
-			user = 'newuser',
-			password = 'newpassword'
-		)
-		
+		POOL = PooledDB(
+		creator=pymysql,  # 使用連結資料庫的模組
+		maxconnections=6,  # 連線池允許的最大連線數，0和None表示不限制連線數
+		mincached=2,  # 初始化時，連結池中至少建立的空閒的連結，0表示不建立
+		maxcached=5,  # 連結池中最多閒置的連結，0和None不限制
+		maxshared=3,  # 連結池中最多共享的連結數量，0和None表示全部共享。PS: 無用，因為pymysql和MySQLdb等模組的 threadsafety都為1，所有值無論設定為多少，_maxcached永遠為0，所以永遠是所有連結都共享。
+		blocking=True,  # 連線池中如果沒有可用連線後，是否阻塞等待。True，等待；False，不等待然後報錯
+		maxusage=None,  # 一個連結最多被重複使用的次數，None表示無限制
+		setsession=[],  # 開始會話前執行的命令列表。如：["set datestyle to ...", "set time zone ..."]
+		ping=0,
+		# ping MySQL服務端，檢查是否服務可用。# 如：0 = None = never, 1 = default = whenever it is requested, 2 = when a cursor is created, 4 = when a query is executed, 7 = always
+		host=os.getenv('host'),
+		port=3306,
+		user=os.getenv('user'),
+		password=os.getenv('password'),
+		database=os.getenv('database'),
+		charset='utf8'
+	)
+		conn = POOL.connection()
 	except:
 		msg = "伺服器內部錯誤"
 		data = {
@@ -433,7 +466,7 @@ def link_mysql():
 		return jsonify({'data':data}) ,500 
 
 	else:
-		return connection
+		return conn
  
 def get_order_code():
 	order_on = str(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time())) + str(time.time()).replace('.','')[-7:])

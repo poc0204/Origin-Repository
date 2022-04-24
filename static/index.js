@@ -18,7 +18,8 @@ let ip_addres = `http://3.87.217.170:3000/`;
     
     setTimeout(function(){
       let spinner_size = document.getElementById("spinner_size")
-      spinner_size.style.display = 'none' ;
+      fadeOut(spinner_size,50);
+      spinner_size.style.display='none'
       document.body.style.display = 'contents' ;
       
     },1000);
@@ -120,10 +121,12 @@ let ip_addres = `http://3.87.217.170:3000/`;
   })
 window.onscroll=function(){
 
-  let nav = document.getElementById("nav");//獲取到導航欄id
-  nav.style.top = '0';
-  nav.style.zIndex = '10';
-  nav.style.position = 'fixed';
+  let header = document.getElementById("header");//獲取到導航欄id
+  header.style.top = '0';
+  header.style.zIndex = '10';
+  header.style.position = 'fixed';
+  let second = document.getElementById("second");
+  second.style.margin = '63px 0px 0px';
   }
 
 
@@ -232,8 +235,9 @@ function login_click(){
   document.body.style.display ="block";
   document.body.style.overflow="hidden";
   document.body.style.margin="0px"
+  
   let login_dialog_size = document.getElementById("login_dialog_size")
-
+  login_dialog_size.style.display="block"
   fadeIn(login_dialog_size,50);
   login_dialog_size.style.height ="auto"
  
@@ -242,6 +246,7 @@ function login_click(){
 function close_login_dialog(){
   let login_dialog_size = document.getElementById("login_dialog_size")
   fadeOut(login_dialog_size,50);
+  login_dialog_size.style.display="none";
   setTimeout(function(){
     let dialog = document.getElementById("dialog")
     dialog.style.display="none";
@@ -345,15 +350,11 @@ function login_member_click(){
               loginout.style.display = "none";
             }
             else{
-              let dialog = document.getElementById("dialog")
-              let login_dialog = document.getElementById("login_dialog")
-              dialog.style.display="none";
-              login_dialog.style.display="none";
               let login = document.getElementById("login")
               let loginout = document.getElementById("loginout")
               login.style.display = "none";
               loginout.style.display = "block";
-              document.body.style.overflow = 'scroll' ;
+              close_login_dialog();
 
             }
           })
@@ -418,7 +419,7 @@ function loginout_click(){
   loginout.style.display = "none";
   let url = ip_addres+`api/user`;
   fetch(url, {method:'DELETE'})
-
+  document.location.href=ip_addres;
 }
 
 function IsEmail(email) {

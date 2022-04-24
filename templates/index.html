@@ -9,7 +9,7 @@
     <title>Welcome</title>
 </head>
 <body> 
-    <header>
+    <div class="header" id="header">
         <div class="spinner_size" id ="spinner_size">
             <div class="spinner" id ="spinner">
                 <div></div>
@@ -47,10 +47,10 @@
             <button class="loginout" id ="loginout" onclick="loginout_click()">登出系統</button>
             <button class="booking_click" id ="booking_click" onclick="booking_click()">預定行程</button>
         </nav>
-    </hr>
-    </header>
+
+    </div>
     {% block header %}
-    <second class="second">
+    <second class="second" id="second">
         <div class="second_size">
             <div class="second_content">
                 <h1>輕鬆享受台北一日悠閒</h1>

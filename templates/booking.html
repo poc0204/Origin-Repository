@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename ='booking.css') }}">
-    <script src="{{ url_for('static', filename='booking.js') }}" type="text/javascript" ></script> 
+   
     <title>Booking</title>
 </head>
 <body>
     {% extends 'index.html' %}
     {% block header %}
+    <div id ="second">
     <div class="booking">
         <div class="booking_size">
             <div class="attraction_conten">
@@ -51,130 +52,14 @@
             <hr id ="hr3">
             <div class="total" id ="total">
             <h4>總價：</h4><h4 id ="sum_booking_price"></h4>
-            <button id="submit-button" onclick="onClick()">確認訂購並付款</button>
+            <button id="submit-button" onclick="tappay()">確認訂購並付款</button>
             </div>
         </div>
     </div>
- 
+    </div>
  
     <script src="https://js.tappaysdk.com/tpdirect/v5.8.0"></script>
-    <script>
-           
-            TPDirect.setupSDK(124035,'app_KFstpVK9lfJucXiKcUMDZiDH65x65x0Uj95gEwRxywXTg6xzFGSfp253l6tV', 'sandbox')
-            let fields = {
-                number: {
-                    // css selector
-                    element:'#card-number',
-                    placeholder: '**** **** **** ****'
-
-                },
-                expirationDate: {
-                    // DOM object
-                    element: document.getElementById('card-expiration-date'),
-                    placeholder: 'MM / YY'
-                },
-                ccv: {
-                    element: '#card-ccv',
-                    placeholder: '後三碼'
-                }
-            }
-            let config = { 
-                isUsedCcv: true 
-            }
-            TPDirect.card.setup({
-                fields: fields,
-                styles: {
-                    // Style all elements
-                'input': {
-                        'border-radius': '5px'
-                    },
-                    // Styling ccv field
-                    'input.ccv': {
-                        'font-size': '16px'
-                    },
-                    // Styling expiration-date field
-                    'input.expiration-date': {
-                        'font-size': '16px'
-                    },
-                    // Styling card-number field
-                    'input.card-number': {
-                        'font-size': '16px',
-                    
-                    },
-                    // style focus state
-                    ':focus': {
-                        'color': 'black'
-                        
-                    },
-                    // style valid state
-                    '.valid': {
-                        'color': 'green'
-                    },
-                    // style invalid state
-                    '.invalid': {
-                        'color': 'red',
-                    },
-                    // Media queries
-                    // Note that these apply to the iframe, not the root window.
-                    '@media screen and (max-width: 400px)': {
-                        'input': {
-                            'color': 'orange'
-                            
-                        }
-                    }
-                }
-            },config)
-            let submitButton = document.querySelector('#submit-button')
-            function onClick() {
-                // 讓 button click 之後觸發 getPrime 方法
-                TPDirect.card.getPrime(function (result) {
-                    if (result.status !== 0) {
-                        alert('信用卡輸入錯誤')
-                        return
-                    }
-                    let data = {
-                        'prime':result.card.prime,
-                        'date': document.getElementById("booking_date").innerText,
-                        'time': document.getElementById("booking_time").innerText,
-                        'pice': document.getElementById("booking_price").innerText,
-                        'address': document.getElementById("booking_address").innerText,
-                        'name': document.getElementById("booking_name").innerText,
-                        'image': document.getElementById("attraction_show_img").src,
-                        'input_name': document.getElementById("input_name").value,
-                        'input_email': document.getElementById("input_email").value,
-                        'input_phone': document.getElementById("input_phone").value,
-                    }
-                  
-                    let url = `/api/orders`;
-                    fetch(url,    
-                    {
-                        method: 'POST',
-                        body:JSON.stringify(data),  
-                        headers:
-                        {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response =>{
-                        return  response.json()
-                    })
-                    .then( data =>{
-                        if (data['error'] === true){
-                            alert('付款失敗')
-                            document.location.href=ip_addres;
-                        }
-                        else{
-                            document.location.href=ip_addres+`thankyou?number=${data['number']}`;
-                        }
-
-                    })
-        
-                })
-         
-
-            }
-    </script>
-    
+    <script src="{{ url_for('static', filename='booking.js') }}" type="text/javascript" ></script> 
     {% endblock %}
 </body>
 </html>
