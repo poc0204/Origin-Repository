@@ -18,22 +18,22 @@
 ![結帳失敗](https://user-images.githubusercontent.com/93992949/164958131-6dab7b49-a089-45e0-a14c-aab0d7353dcf.png)
 
 ## 資料夾說明
-* data:景點資料，存入資料庫
-* static:css、js
-  * images:圖片
-* templates:模板
-* .gitignore:env(環境變數、隱藏敏感訊息)
-* app.py:主程式
-* test.py:測試
+* data: 景點資料，存入資料庫
+* static: css、js
+  * images: 圖片
+* templates: 模板
+* gitignore: env(環境變數、隱藏敏感訊息)
+* app.py: 主程式
+* test.py: 測試
   
 ## 使用技術
-### 前端:
+### 前端
 * Html 
 * Css 
 * JavaScript
 * Rwd
 * AJAX 串接後端API
-### 後端:
+### 後端
 * Python Flask
 * MySql 連線池
 * env 敏感資訊
