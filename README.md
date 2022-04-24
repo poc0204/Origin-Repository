@@ -15,8 +15,8 @@
 * MySql
 * env 敏感資訊
 * API 開發
+* session 紀錄登入狀態
 ## 第三方金流服務
 * Tappay
 ## 部署
 * AWS EC2
-* 
