@@ -17,7 +17,11 @@
 ### 結帳失敗 
 ![結帳失敗](https://user-images.githubusercontent.com/93992949/164958131-6dab7b49-a089-45e0-a14c-aab0d7353dcf.png)
 
-
+## 資料夾說明
+* data 存放景點資料，已整理過，存入資料庫
+* static css js
+  * images 圖片
+  
 ## 使用技術
 ### 前端:
 * Html 
