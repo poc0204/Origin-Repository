@@ -1,6 +1,7 @@
 # Origin-Repository
 ## 作品說明
 ## 台北一日遊 電商旅遊網(http://3.87.217.170:3000/) 
+![首頁](https://user-images.githubusercontent.com/93992949/164957949-c9f587b0-f607-4f87-b530-4d10dc351369.png)
 
 ## 使用技術
 ### 前端:
