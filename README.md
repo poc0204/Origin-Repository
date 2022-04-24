@@ -9,11 +9,12 @@
 * Css 
 * JavaScript
 * Rwd
-* AJAX 串接API
+* AJAX 串接後端API
 ### 後端:
 * Python Flask
 * MySql
 * env 敏感資訊
+* API 開發
 
 ## 第三方金流服務
 * Tappay
