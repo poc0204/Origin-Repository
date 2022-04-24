@@ -21,6 +21,10 @@
 * data 存放景點資料，已整理過，存入資料庫
 * static css js
   * images 圖片
+* templates 模板
+* .gitignore env 環境變數 隱藏敏感訊息
+* app.py 主程式
+* test.py 測次技術
   
 ## 使用技術
 ### 前端:
