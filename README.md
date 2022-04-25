@@ -16,6 +16,8 @@
 ![結帳成功](https://user-images.githubusercontent.com/93992949/164958033-5512c5c4-7f9f-4c33-9262-d172978d6d47.png)
 ### 結帳失敗 
 ![結帳失敗](https://user-images.githubusercontent.com/93992949/164958131-6dab7b49-a089-45e0-a14c-aab0d7353dcf.png)
+### Rwd
+![Rwd](https://user-images.githubusercontent.com/93992949/165018303-bcb9f654-0534-43c0-b55e-ba6762634c5c.png)
 
 ## 資料夾說明
 * data: 景點資料，存入資料庫
