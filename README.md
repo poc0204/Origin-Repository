@@ -19,7 +19,7 @@
 
 ## 資料夾說明
 * data: 景點資料，存入資料庫
-* static: css、js
+* static: CSS、JS
   * images: 圖片
 * templates: 模板
 * gitignore: env(環境變數、隱藏敏感訊息)
@@ -29,9 +29,9 @@
 ## 使用技術
 ### 前端
 * Html 
-* Css 
+* CSS
 * JavaScript
-* Rwd
+* RWD
 * AJAX 串接後端API
 ### 後端
 * Python Flask
