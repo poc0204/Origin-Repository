@@ -35,10 +35,10 @@
 * AJAX 串接後端API
 ### 後端
 * Python Flask
-* MySql 連線池
+* MySQL 連線池
 * env 敏感資訊
 * API 開發
-* session 紀錄登入狀態
+* Session 紀錄登入狀態
 ## 第三方服務
 * Tappay
 * AWS EC2
