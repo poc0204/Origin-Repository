@@ -43,6 +43,6 @@
 * Tappay
 * AWS EC2
 ## 未來改善項目
-* session 換成 JWT 
+* Session 換成 JWT 
 * 資料庫會員密碼加密存入
 * 購買紀錄查詢
