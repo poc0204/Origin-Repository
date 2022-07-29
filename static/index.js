@@ -2,7 +2,7 @@ let start_data = [] ;
 let page = [] ;
 let start_time  = [] ;
 let end_time = [] ;
-let ip_addres = `http://3.87.217.170:3000/`;
+let ip_addres = `http://127.0.0.1:3000/`;
   document.addEventListener("DOMContentLoaded",function(){
     page = 0 ;
     fetch(ip_addres+`api/attractions?page=${page}`, {method: 'get'})

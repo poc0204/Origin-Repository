@@ -1,20 +1,9 @@
-from datetime import date
-from pickle import NONE
-from pprint import pprint
-from telnetlib import PRAGMA_HEARTBEAT
-from urllib import response
-from wsgiref.util import request_uri
-from flask import Flask ,redirect,url_for ,render_template , request , session  , make_response,jsonify
+from flask import Flask,render_template , request , session  ,jsonify
 import json , re
-import mysql.connector
 import requests
 import time
-
 import pymysql
-import threading
-from dbutils.pooled_db import PooledDB, SharedDBConnection
-from dotenv import load_dotenv, find_dotenv
-from pathlib import Path
+from dbutils.pooled_db import PooledDB
 import os
 
 

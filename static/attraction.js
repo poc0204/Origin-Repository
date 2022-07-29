@@ -1,10 +1,10 @@
 let id_number = location.href
 
-//id_number = id_number.substring(33,100)
-id_number = id_number.substring(36,100)
+id_number = id_number.substring(33,100)
+//id_number = id_number.substring(36,100)
 
 let booking_attractions = []
-let ip_address = `http://3.87.217.170:3000/`
+let ip_address = `http://127.0.0.1:3000/`
 
 fetch(ip_address+`api/attractions/${id_number}`, {method: 'GET'})
 .then(response =>{

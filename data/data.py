@@ -1,9 +1,6 @@
 import json , re
-from operator import le
-from telnetlib import PRAGMA_HEARTBEAT
-from matplotlib import image
 import mysql.connector
-from mysql.connector import Error
+
 
 with open("taipei-attractions.json","r" , encoding="utf8" ) as f:
     data = json.load(f)
