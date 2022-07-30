@@ -7,14 +7,6 @@ with open("taipei-attractions.json","r" , encoding="utf8" ) as f:
 
 all_data = data['result']['results']
 
-connection = mysql.connector.connect(
-    host = 'localhost',
-    database = 'website',
-    user = 'root',
-    password = 'mysql'
-)
-cursor = connection.cursor()
-
 
 set_data = []
 for show in all_data:
